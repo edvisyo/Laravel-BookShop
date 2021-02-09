@@ -1,0 +1,46 @@
+.register {
+    margin-top: 30px;
+    .register-link {
+        margin-left: 8px;
+    }
+}
+
+.login-link {
+    margin-left: 8px;
+}
+
+.book-container {
+    margin-top: 8px;
+    .book-image {
+        height: 290px;
+        border-radius: 3px;
+    }
+    .book-title {
+        margin-top: 12px;
+        text-transform: capitalize;
+    }
+    .book-author {
+        text-transform: capitalize;
+    }
+}
+
+.book-review {
+    .book-review-image {
+        border-radius: 3px;
+        height: 550px;
+    }
+    .single-book-title {
+        text-transform: capitalize;
+    }
+    .single-book-authors {
+        text-transform: capitalize;
+    }
+    .single-book-description {
+        margin-top: 50px;
+    }
+}
+
+.hidden-comment-form {
+    display: none;
+}
+

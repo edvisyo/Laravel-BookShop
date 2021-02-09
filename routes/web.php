@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\ReviewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', BooksController::class);
+// Route::get('/', [BooksController::class, 'index']);
+
+// Route::get('/', [BooksController::class, 'getBooks']);
+Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
+Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
 Auth::routes();
 

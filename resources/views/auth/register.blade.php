@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
 
-                                @error('name')
+                                @error('birthdate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -69,6 +69,17 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <div class="form-group row mb-0 login">
+                        <div class="col-md-8 offset-md-4">
+                            <b>Already have an account?</b>
+                            <a class="login-link" href="{{ route('login') }}">
+                                {{ __('Login')}}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -65,6 +65,17 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <div class="form-group row mb-0 register">
+                        <div class="col-md-8 offset-md-4">
+                            <b>Do not have an account?</b>
+                            <a class="register-link" href="{{ route('register')}}">
+                                {{ __('Register')}}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
