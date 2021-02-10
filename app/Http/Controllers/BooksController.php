@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Genre;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
 
@@ -36,7 +37,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        //$books = Book::all();
+        $books = Book::with('genres')->get();
         return view('index')->with('books', $books);
     }
 

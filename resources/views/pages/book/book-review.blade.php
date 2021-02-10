@@ -16,9 +16,15 @@
                     </div>
                     <hr>
                     <div class="single-book-authors">
-                        <h5><span class="badge badge-pill badge-secondary">{{$singleBook->authors}}</span></h5>
+                        <h5><span class="">{{$singleBook->authors}}</span></h5>
                     </div>
-                    <h5>Zanras/ai</h5>
+                        <ul>
+                            @foreach ($singleBook->genres as $genre)
+                            {{-- <div class=""> --}}
+                                <li><h5><span class="badge badge-pill badge-secondary">{{$genre->name}}</span></h5></li>
+                            {{-- </div> --}}
+                        @endforeach
+                        </ul>
                     <div class="single-book-description">
                         {{$singleBook->description}}
                     </div>

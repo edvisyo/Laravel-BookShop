@@ -26,9 +26,11 @@ class Book extends Model
 
     public function getBookBySlug($slug)
     {
-        $data = DB::table('books')->where('slug', $slug)->get()->first();
+        //$data = DB::table('books')->where('slug', $slug)->get()->first();
+        $data = Book::with('genres')->where('slug', $slug)->get()->first();
+        
         // $data = DB::table('books')
-        //         ->join('reviews', 'reviews.book_id', '=', 'books.id')
+        //         ->join('users', 'users.id', '=', 'books.user_id')
         //         ->select('books.id', 
         //                  'books.user_id', 
         //                  'books.title',
@@ -37,9 +39,14 @@ class Book extends Model
         //                  'books.authors',
         //                  'books.price',
         //                  'books.cover',
-        //                  'reviews.comment AS comment')
+        //                  'users.email AS user')
         //                  ->where('slug', $slug)->get()->first();
         return $data;
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
     }
 
 }
