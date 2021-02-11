@@ -25,9 +25,21 @@ class Book extends Model
     ];
 
     public function getBookBySlug($slug)
-    {
-        //$data = DB::table('books')->where('slug', $slug)->get()->first();
-        $data = Book::with('genres')->where('slug', $slug)->get()->first();
+    {   
+        $data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
+        
+        // $data = Book::with('authors', 'genres', 'reviews')
+        // ->join('reviews', 'reviews.user_id', '=', 'books.user_id')
+        // ->join('users', 'users.id', '=', 'reviews.user_id')
+        // ->select('books.id', 
+        //                  'books.user_id', 
+        //                  'books.title',
+        //                  'books.slug',
+        //                  'books.description',
+        //                  'books.price',
+        //                  'books.cover',
+        //                  'users.email AS user')
+        // ->where('slug', $slug)->get()->first();
         
         // $data = DB::table('books')
         //         ->join('users', 'users.id', '=', 'books.user_id')
@@ -36,7 +48,7 @@ class Book extends Model
         //                  'books.title',
         //                  'books.slug',
         //                  'books.description',
-        //                  'books.authors',
+        //                  //'books.authors',
         //                  'books.price',
         //                  'books.cover',
         //                  'users.email AS user')
@@ -44,9 +56,24 @@ class Book extends Model
         return $data;
     }
 
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
+    }
+
+    public function reviews()
+    {
+        return $this->belongsToMany(Review::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

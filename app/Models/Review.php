@@ -11,7 +11,7 @@ class Review extends Model
 
     protected $fillable = [
         'comment',
-        'book_id',
+        //'book_id',
         'user_id'
     ];
 }

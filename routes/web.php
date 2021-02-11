@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,9 @@ Route::resource('/', BooksController::class);
 // Route::get('/', [BooksController::class, 'getBooks']);
 Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
 Route::post('/book', [ReviewsController::class, 'storeBookReview']);
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
 
 Auth::routes();
 

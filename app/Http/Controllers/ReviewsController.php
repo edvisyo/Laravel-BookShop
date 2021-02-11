@@ -4,24 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\BookReview;
 
 class ReviewsController extends Controller
 {
       
     public function storeBookReview(Request $request) 
     {
-        $user_id = Auth()->user()->id;
+       $user_id = Auth()->user()->id;
        
        $this->validate($request, [
            'comment' => 'required' 
        ]);
 
-       $bookReview = new Review();
-       $bookReview->comment = $request->input('comment');
-       $bookReview->book_id = $request->input('book_id');
-       $bookReview->user_id = $user_id;
-
-       $bookReview->save();
+       $bookReviewComment = new Review();
+       $bookReviewPivot = new BookReview();
+       
+       $bookReviewComment->comment = $request->input('comment');
+       $bookReviewComment->user_id = $user_id;
+       $bookReviewComment->save();
+       
+       $bookReviewPivot->book_id = $request->input('book_id');
+       $lastId = $bookReviewComment->id;
+       $bookReviewPivot->review_id = $lastId;
+       
+        $bookReviewPivot->save();
 
        return redirect()->back();
     }

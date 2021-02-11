@@ -23,9 +23,11 @@
                                 <div class="book-title">
                                     <h4>{{$book->title}}</h4>
                                 </div>
-                                <div class="book-author">
-                                    <p>{{$book->authors}}</p>
-                                </div>
+                                @foreach ($book->authors as $author)
+                                    <div class="book-author">
+                                        <span>{{$author->fullname}}</span>
+                                    </div>
+                                @endforeach
                                 <div class="book-price">
                                     <b>{{$book->price}} &euro;</b>
                                 </div>

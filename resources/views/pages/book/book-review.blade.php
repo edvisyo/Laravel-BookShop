@@ -16,14 +16,16 @@
                     </div>
                     <hr>
                     <div class="single-book-authors">
-                        <h5><span class="">{{$singleBook->authors}}</span></h5>
+                        <ul>
+                            @foreach ($singleBook->authors as $author)
+                                <li><h5>{{$author->fullname}}</h5></li>
+                            @endforeach
+                        </ul>
                     </div>
                         <ul>
                             @foreach ($singleBook->genres as $genre)
-                            {{-- <div class=""> --}}
                                 <li><h5><span class="badge badge-pill badge-secondary">{{$genre->name}}</span></h5></li>
-                            {{-- </div> --}}
-                        @endforeach
+                            @endforeach
                         </ul>
                     <div class="single-book-description">
                         {{$singleBook->description}}
@@ -33,7 +35,9 @@
         </div>
 
         <h3>Reviews</h3>
-        {{-- {{$singleBook->comment}} --}}
+            @foreach ($singleBook->reviews as $review)
+                <p>{{$review->comment}}</p>
+            @endforeach
         <hr>
         <button class="btn btn-default" onclick="showCommentForm()">Leave a comment about this book</button>
         <div class="hidden-comment-form" id="commentForm">

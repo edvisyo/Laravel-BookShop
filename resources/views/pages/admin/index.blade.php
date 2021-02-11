@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        userio puslapis
+        admino puslapis
     </div>
 @endsection

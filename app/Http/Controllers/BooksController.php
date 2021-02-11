@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\Author;
+use App\Models\AuthorBook;
+use App\Models\BookGenre;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
 
@@ -38,7 +41,7 @@ class BooksController extends Controller
     public function index()
     {
         //$books = Book::all();
-        $books = Book::with('genres')->get();
+        $books = Book::with('authors')->get();
         return view('index')->with('books', $books);
     }
 
@@ -64,24 +67,48 @@ class BooksController extends Controller
         $user_id = Auth()->user()->id;
 
         $this->validate($request, [
+            'authors' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'authors' => 'required',
             'price' => 'required',
             'cover' => 'required'
         ]);
         
+        $author = new Author();
         $book = new Book();
+        $authorBook = new AuthorBook();
+        $genreBook = new BookGenre();
+        
         $book->user_id = $user_id;
+
+        $author->fullname = $request->input('authors');
+        $author->save();
+        $author_id = $author->id;
+
+        $genres = $request->input('genres');
+        $genre = explode(',', $genres);
+        foreach ($genre as $genree) {
+            Genre::create(['name' => $genree]);
+        }
+        $genre_id = $genre->id;
+        //$gen = explode(',', $genre_id);
+        
         $book->title = $request->input('title');
         $slug = Str::slug($request->input('title'));
         $book->slug = $slug;
         $book->description = $request->input('description');
-        $book->authors = $request->input('authors');
         $book->price = $request->input('price');
         $book->cover = $request->file('cover')->store('images', 'public');
-
         $book->save();
+        $book_id = $book->id;
+        
+        $authorBook->author_id = $author_id;
+        $authorBook->book_id = $book_id;
+        $authorBook->save();
+
+        $genreBook->book_id = $book_id;
+        $genreBook->genre_id = $genre_id;
+        $genreBook->save();
 
         return redirect('/');
     }
@@ -100,6 +127,11 @@ class BooksController extends Controller
     {
         $singleBook = $this->bookRepository->getBookBySlug($request);
         return view('pages.book.book-review')->with('singleBook', $singleBook);
+    }
+
+    public function getBookReviews(request $request)
+    {
+        
     }
 
     /**
