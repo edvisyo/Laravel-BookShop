@@ -22,4 +22,20 @@ class BookRepository
         $data = $book->getBookBySlug($slug);
         return $data;
     }
+
+    // public function getUserBooks()
+    // {
+    //     $slug = $request->slug;
+    //     $book = new Book();
+    //     $data = $book->getBookBySlug($slug);
+    //     return $data;
+    // }
+
+
+    // public function getAllBooksRelatedToUser()
+    // {
+    //     $books = Db::table('books')
+    //              ->join('authors', 'authors.')
+    //              ->select()
+    // }
 }

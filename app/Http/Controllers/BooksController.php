@@ -81,8 +81,11 @@ class BooksController extends Controller
         
         $book->user_id = $user_id;
 
+        // $authors = $request->input('authors');
+        // $author->fullname = $authors;
         $author->fullname = $request->input('authors');
         $author->save();
+        // $author->authors()->attach($authors);
         $author_id = $author->id;
 
         $genres = $request->input('genres');

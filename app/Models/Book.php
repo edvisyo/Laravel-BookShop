@@ -56,6 +56,13 @@ class Book extends Model
         return $data;
     }
 
+    // public function getUserBooks($user_id)
+    // {
+    //     $user_books = Book::with('authors', 'genres')->where('user_id', $user_id)->get();
+
+    //     return $user_books;
+    // }
+
     public function authors()
     {
         return $this->belongsToMany(Author::class);
