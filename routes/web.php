@@ -26,6 +26,8 @@ Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin_page');
 Route::get('/user', [UserController::class, 'index'])->name('user_page');
+Route::get('/user/change-email/{id}', [UserController::class, 'updateEmailView'])->name('user_email_update');
+Route::put('/user/change-email/{id}', [UserController::class, 'updateEmail']);
 
 Auth::routes();
 

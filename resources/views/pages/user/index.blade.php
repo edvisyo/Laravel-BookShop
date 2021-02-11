@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="container">
-        <h4>&quot;{{Auth()->user()->email}}&quot; knygu sarasas:</h4>
+        <h4>&quot;{{Auth()->user()->email}}&quot; book listing:</h4>
         <br>
+        {{-- <a href="{{ route('user_email_update') }}">Change Email</a> --}}
+        <a href="user/change-email/{{Auth()->user()->id}}">Change Email</a>
         <table class="table">
             <thead>
               <tr>
