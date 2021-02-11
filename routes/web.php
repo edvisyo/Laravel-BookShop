@@ -24,8 +24,8 @@ Route::resource('/', BooksController::class);
 Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
 Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/admin', [AdminController::class, 'index'])->name('admin_page');
+Route::get('/user', [UserController::class, 'index'])->name('user_page');
 
 Auth::routes();
 

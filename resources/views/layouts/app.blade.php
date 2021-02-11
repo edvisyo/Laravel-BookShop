@@ -65,6 +65,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @foreach (Auth::user()->role as $role)
+                                        @if ($role->name == 'admin')
+                                            <a class="dropdown-item" href="{{ route('admin_page') }}">Dashboard</a>
+                                        @else
+                                            <a class="dropdown-item" href="{{ route('user_page') }}">Dashboard</a>
+                                        @endif
+                                    @endforeach
+                                    {{-- <a class="dropdown-item" href="{{ route('admin_page') }}">Admin</a>
+                                    <a class="dropdown-item" href="{{ route('user_page') }}">User</a> --}}
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
