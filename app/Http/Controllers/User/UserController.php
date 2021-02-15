@@ -24,10 +24,9 @@ class UserController extends Controller
     }
 
     
-    public function updateEmailView($id)
+    public function updateEmailView()
     {
-       $user = User::find($id);
-        return view('pages.user.change_email')->with('user', $user);
+        return view('pages.user.change_email');
     }
 
 
@@ -36,6 +35,15 @@ class UserController extends Controller
         $user = User::find($id);
         $user->email = $request->input('new_email');
         $user->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteBook($id)
+    {
+        $book = Book::find($id);
+        unlink('storage/'.$book->cover);
+        $book->delete();
 
         return redirect()->back();
     }

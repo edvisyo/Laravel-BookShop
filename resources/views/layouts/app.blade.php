@@ -84,6 +84,16 @@
         </nav>
 
         <main class="py-4">
+            @if (Auth()->user() != null)
+            <div class="container">
+                <div class="row justify-content-end">
+                    <a class="btn btn-primary mb-4 mr-4" href="{{ route('create')}}">
+                        Add Book To Listing
+                    </a>
+                </div>
+            </div>
+            @endif
+
             @yield('content')
         </main>
     </div>

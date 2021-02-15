@@ -48,6 +48,10 @@ ul li {
   margin-top: 50px;
 }
 
+.genre-name {
+  text-transform: capitalize;
+}
+
 .hidden-comment-form {
   display: none;
 }

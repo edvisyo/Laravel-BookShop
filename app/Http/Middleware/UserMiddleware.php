@@ -19,11 +19,11 @@ class UserMiddleware
     {
         foreach(Auth::user()->role as $role)
         {
-            if($role->name == 'user')
+            if($role->name != 'user')
             {
-                return $next($request);
+                return redirect('/');
             }
         }
-        return redirect('/');
+        return $next($request);
     }
 }

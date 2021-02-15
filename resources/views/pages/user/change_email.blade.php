@@ -6,7 +6,6 @@
 
         <br>
         {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@updateEmail', Auth()->user()->id], 'method' => 'POST']) !!}
-        {{-- {!! Form::open() !!} --}}
             @csrf
             @method('PUT')
                 <div class="form-group">

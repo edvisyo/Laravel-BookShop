@@ -24,7 +24,7 @@
                     </div>
                         <ul>
                             @foreach ($singleBook->genres as $genre)
-                                <li><h5><span class="badge badge-pill badge-secondary">{{$genre->name}}</span></h5></li>
+                                <li><h5><span class="badge badge-pill badge-secondary genre-name">{{$genre->name}}</span></h5></li>
                             @endforeach
                         </ul>
                     <div class="single-book-description">

@@ -4,8 +4,8 @@
     <div class="container">
         <h4>&quot;{{Auth()->user()->email}}&quot; book listing:</h4>
         <br>
-        {{-- <a href="{{ route('user_email_update') }}">Change Email</a> --}}
-        <a href="user/change-email/{{Auth()->user()->id}}">Change Email</a>
+        <a href="{{ route('user_email_update') }}">Change Email</a>
+        {{-- <a href="user/change-email/{{Auth()->user()->id}}">Change Email</a> --}}
         <table class="table">
             <thead>
               <tr>
@@ -42,7 +42,11 @@
                             <td>{{$user_book->price}} &euro;</td>
                             <td>
                                 <button class="btn btn-warning">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                                {{-- <button class="btn btn-danger">Delete</button> --}}
+                                {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@deleteBook', $user_book->id], 'method' => 'POST']) !!}
+                                    {{Form::hidden('_method', 'DELETE')}}
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                     </tbody>

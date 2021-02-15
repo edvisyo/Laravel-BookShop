@@ -4,13 +4,13 @@
     <div class="container">
         <div class="book-container">
 
-            @if (Auth()->user() != null)
+            {{-- @if (Auth()->user() != null)
             <div class="row justify-content-end">
                 <a class="btn btn-primary mb-4 mr-4" href="{{ route('create')}}">
                     Add Book To Listing
                 </a>
             </div>
-            @endif
+            @endif --}}
         
             <div class="books">
                 <div class="row">
@@ -37,5 +37,6 @@
                 </div>
             </div>
         </div>
+        {{-- {{ $books->links() }} --}}
     </div>
 @endsection

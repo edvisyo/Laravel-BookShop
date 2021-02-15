@@ -19,11 +19,14 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description');
-            $table->double('price');
+            $table->integer('price');//<-Should be integer(cents)
             $table->text('cover');
+            // $table->integer('discount')->default(0);
+            $table->integer('discount')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 

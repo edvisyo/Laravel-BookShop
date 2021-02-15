@@ -48,6 +48,10 @@ ul {
     }
 }
 
+.genre-name {
+    text-transform: capitalize;
+}
+
 .hidden-comment-form {
     display: none;
 }

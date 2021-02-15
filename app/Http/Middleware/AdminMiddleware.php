@@ -19,11 +19,11 @@ class AdminMiddleware
     {
         foreach(Auth::user()->role as $role)
         {
-            if($role->name == 'admin')
+            if($role->name != 'admin')
             {
-                return $next($request);
+                return redirect('/');
             }
         }
-        return redirect('/');
+        return $next($request);
     }
 }

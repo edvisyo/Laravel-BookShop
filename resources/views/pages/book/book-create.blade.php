@@ -12,7 +12,7 @@
                     {{Form::text('authors', null, ['class' => 'form-control'])}}
                 </div>
                 <div class="col">
-                    {{Form::label('genres', 'Genre (should be seperated by comma)')}}
+                    {{Form::label('genres', 'Genre (should be seperated by comma)* type ID for now')}}
                     {{Form::text('genres', null, ['class' => 'form-control'])}}
                 </div>
             </div>

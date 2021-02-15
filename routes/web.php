@@ -24,11 +24,20 @@ Route::resource('/', BooksController::class);
 Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
 Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin_page');
-Route::get('/user', [UserController::class, 'index'])->name('user_page');
-Route::get('/user/change-email/{id}', [UserController::class, 'updateEmailView'])->name('user_email_update');
-Route::put('/user/change-email/{id}', [UserController::class, 'updateEmail']);
 
 Auth::routes();
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
+        Route::get('/', [AdminController::class, 'index'])->name('admin_page');
+    });
+    
+    Route::group(['middleware' => 'user', 'prefix' => 'user'], function() {
+        Route::get('/', [UserController::class, 'index'])->name('user_page');
+        Route::delete('/{id}', [UserController::class, 'deleteBook']);
+        Route::get('/change-email', [UserController::class, 'updateEmailView'])->name('user_email_update');
+        Route::put('/change-email/{id}', [UserController::class, 'updateEmail']);
+    });
+});
+

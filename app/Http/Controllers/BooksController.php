@@ -40,7 +40,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //$books = Book::all();
+        //$books = Book::orderBy('created_at', 'desc')->peginate(3);
         $books = Book::with('authors')->get();
         return view('index')->with('books', $books);
     }
@@ -64,54 +64,33 @@ class BooksController extends Controller
     public function store(Request $request)
     {
 
-        $user_id = Auth()->user()->id;
-
         $this->validate($request, [
             'authors' => 'required',
+            'genres' => 'required',
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
             'cover' => 'required'
         ]);
         
-        $author = new Author();
-        $book = new Book();
-        $authorBook = new AuthorBook();
-        $genreBook = new BookGenre();
+        $book = auth()->user()->book()->create([
+            'title' => $request['title'],
+            $slug = Str::slug($request['title']),
+            'slug' => $slug,
+            'description' => $request['description'],
+            'price' => $request['price'],
+            'cover' => $request->file('cover')->store('images', 'public')
+        ]);
         
-        $book->user_id = $user_id;
+        
+        
+        $book->genres()->attach($request->input('genres'));
 
-        // $authors = $request->input('authors');
-        // $author->fullname = $authors;
-        $author->fullname = $request->input('authors');
-        $author->save();
-        // $author->authors()->attach($authors);
-        $author_id = $author->id;
-
-        $genres = $request->input('genres');
-        $genre = explode(',', $genres);
-        foreach ($genre as $genree) {
-            Genre::create(['name' => $genree]);
+        $authors = explode(',', $request->input('authors'));
+        foreach ($authors as $authorName) {
+            $author = Author::updateOrCreate(['fullname' => $authorName]);
+            $book->authors()->attach($author->id);
         }
-        $genre_id = $genre->id;
-        //$gen = explode(',', $genre_id);
-        
-        $book->title = $request->input('title');
-        $slug = Str::slug($request->input('title'));
-        $book->slug = $slug;
-        $book->description = $request->input('description');
-        $book->price = $request->input('price');
-        $book->cover = $request->file('cover')->store('images', 'public');
-        $book->save();
-        $book_id = $book->id;
-        
-        $authorBook->author_id = $author_id;
-        $authorBook->book_id = $book_id;
-        $authorBook->save();
-
-        $genreBook->book_id = $book_id;
-        $genreBook->genre_id = $genre_id;
-        $genreBook->save();
 
         return redirect('/');
     }
