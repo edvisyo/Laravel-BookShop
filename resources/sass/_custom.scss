@@ -21,6 +21,7 @@ ul {
     margin-top: 8px;
     .book-image {
         height: 290px;
+        width: 198px;
         border-radius: 3px;
     }
     .book-title {
@@ -68,3 +69,14 @@ ul {
     display: block;
 }
 
+.new-product {
+    position: absolute;
+    z-index: 15;
+    margin-top: 1vh;
+}
+
+.discount {
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 14vh;
+}

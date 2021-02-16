@@ -24,6 +24,7 @@ ul li {
 }
 .book-container .book-image {
   height: 290px;
+  width: 198px;
   border-radius: 3px;
 }
 .book-container .book-title {
@@ -66,6 +67,18 @@ ul li {
 
 .user-books-genres-list {
   display: block;
+}
+
+.new-product {
+  position: absolute;
+  z-index: 15;
+  margin-top: 1vh;
+}
+
+.discount {
+  position: absolute;
+  margin-top: 1vh;
+  margin-left: 14vh;
 }
 
 /*!

@@ -21,8 +21,9 @@ class CreateBooksTable extends Migration
             $table->string('description');
             $table->integer('price');//<-Should be integer(cents)
             $table->text('cover');
-            // $table->integer('discount')->default(0);
-            $table->integer('discount')->nullable();
+            $table->integer('discount')->default(0);
+            //$table->integer('discount')->nullable();
+            $table->integer('approved')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

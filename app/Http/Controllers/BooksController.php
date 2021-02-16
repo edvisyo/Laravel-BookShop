@@ -40,9 +40,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //$books = Book::orderBy('created_at', 'desc')->peginate(3);
-        $books = Book::with('authors')->get();
+        $books = Book::with('authors')->where('approved', '!=', '0')->paginate(25);
         return view('index')->with('books', $books);
+        // $books = Book::with('authors')->get();
+        // return view('index')->with('books', $books);
     }
 
     /**

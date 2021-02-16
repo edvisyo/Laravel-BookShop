@@ -8,7 +8,7 @@
             @csrf
             <div class="form-row">
                 <div class="col">
-                    {{Form::label('authors', 'Authors')}}
+                    {{Form::label('authors', 'Authors (Full-Name)*')}}
                     {{Form::text('authors', null, ['class' => 'form-control'])}}
                 </div>
                 <div class="col">

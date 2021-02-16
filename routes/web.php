@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');
+        Route::put('/{id}', [AdminController::class, 'approveBook']);
     });
     
     Route::group(['middleware' => 'user', 'prefix' => 'user'], function() {

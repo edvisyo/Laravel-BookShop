@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                             <th><img class="user-book-image" src="{{ URL::asset('storage/'.$user_book->cover) }}" alt="User book"></th>
-                            <td>{{$user_book->title}}</td>
+                            <td><p class="genre-name">{{$user_book->title}}</p></td>
                             <td>{{$user_book->description}}</td>
                             <td>
                                 <ul>
@@ -35,14 +35,13 @@
                             <td>
                                 <ul>
                                     @foreach ($user_book->genres as $genre)
-                                        <li class="user-books-genres-list">{{$genre->name}}</li>
+                                        <li class="user-books-genres-list genre-name">{{$genre->name}}</li>
                                     @endforeach
                                 </ul>
                             </td>
                             <td>{{$user_book->price}} &euro;</td>
                             <td>
                                 <button class="btn btn-warning">Edit</button>
-                                {{-- <button class="btn btn-danger">Delete</button> --}}
                                 {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@deleteBook', $user_book->id], 'method' => 'POST']) !!}
                                     {{Form::hidden('_method', 'DELETE')}}
                                     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}

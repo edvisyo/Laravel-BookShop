@@ -20,8 +20,9 @@ class ReviewsController extends Controller
        $bookReviewComment = new Review();
        $bookReviewPivot = new BookReview();
        
-       $bookReviewComment->comment = $request->input('comment');
+       $bookReviewComment->book_id = $request->input('book_id');
        $bookReviewComment->user_id = $user_id;
+       $bookReviewComment->comment = $request->input('comment');
        $bookReviewComment->save();
        
        $bookReviewPivot->book_id = $request->input('book_id');
