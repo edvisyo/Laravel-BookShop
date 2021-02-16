@@ -81,6 +81,10 @@ ul li {
   margin-left: 14vh;
 }
 
+.approved-book-message {
+  color: green;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

@@ -15,6 +15,7 @@
                 <th scope="col">Authors</th>
                 <th scope="col">Genres</th>
                 <th scope="col">Price</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -40,12 +41,22 @@
                                 </ul>
                             </td>
                             <td>{{$user_book->price}} &euro;</td>
+                            <td>@if ($user_book->approved == 0)
+                                    <h5><span class="badge badge-info">Pending..</span></h5>
+                                @else
+                                    <h5><span class="badge badge-success">Book approved</span></h5>
+                                @endif
+                            </td>
                             <td>
-                                <button class="btn btn-warning">Edit</button>
-                                {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@deleteBook', $user_book->id], 'method' => 'POST']) !!}
-                                    {{Form::hidden('_method', 'DELETE')}}
-                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                {!! Form::close() !!}
+                                <ul>
+                                    <li><button class="btn btn-warning">Edit</button></li>
+                                    <li>
+                                        {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@deleteBook', $user_book->id], 'method' => 'POST']) !!}
+                                                {{Form::hidden('_method', 'DELETE')}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {!! Form::close() !!}
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
                     </tbody>

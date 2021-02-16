@@ -31,6 +31,13 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');
+        Route::get('/change-email', [AdminController::class, 'updateEmailView'])->name('admin_email_update');
+        Route::put('/change-email{id}', [AdminController::class, 'updateEmail']);
+        Route::get('/change-password', [AdminController::class, 'updatePasswordView'])->name('admin_password_update');
+        Route::put('/change-password/{id}', [AdminController::class, 'updatePassword']);
+        Route::get('/create-new-user', [AdminController::class, 'createNewUserView'])->name('create_new_user');
+        Route::post('/create-new-user', [AdminController::class, 'createNewUser']);
+        Route::delete('/{id}', [AdminController::class, 'deleteBook']);
         Route::put('/{id}', [AdminController::class, 'approveBook']);
     });
     

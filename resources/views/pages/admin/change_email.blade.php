@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container">
-        {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@updateEmail', Auth()->user()->id], 'method' => 'POST']) !!}
+        <div class="back-link">
+            <a class="btn btn-default mb-4" href="{{ route('admin_page')}}">Back</a>
+        </div>
+        <h3 class="mb-4">Chane email:</h3>
+        {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@updateEmail', Auth()->user()->id], 'method' => 'POST']) !!}
             @csrf
             @method('PUT')
                 <div class="form-group">

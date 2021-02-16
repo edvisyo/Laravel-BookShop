@@ -2,8 +2,21 @@
 
 @section('content')
 <div class="container-fluid">
+
     <h3>Admin page</h3>
-    <a href="{{ route('user_email_update') }}">Change Email</a>
+    
+    <ul class="nav nav-tabs mb-1">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin_email_update') }}">Change email</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin_password_update') }}">Change password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('create_new_user') }}">Create new user</a>
+        </li>
+    </ul>
+
     <table class="table">
         <thead>
           <tr>
@@ -13,6 +26,7 @@
             <th scope="col">Authors</th>
             <th scope="col">Genres</th>
             <th scope="col">Price</th>
+            <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -43,18 +57,26 @@
                         </td>
                         <td>{{$books->price}} &euro;</td>
                         <td>
-                            {{-- <button class="btn btn-warning">Edit</button>
-                            {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@deleteBook', $books->id], 'method' => 'POST']) !!}
-                                {{Form::hidden('_method', 'DELETE')}}
-                                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                            {!! Form::close() !!} --}}
-
-
-                            {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@approveBook', $books->id], 'method' => 'POST']) !!}
-                                {{Form::hidden('_method', 'PUT')}}
-                                    <input type="hidden" name="set_approve_status" value="1">
-                                {{Form::submit('Approve book', ['class' => 'btn btn-success btn-sm'])}}
-                            {!! Form::close() !!}
+                             @if ($books->approved == 0)
+                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@approveBook', $books->id], 'method' => 'POST']) !!}
+                                        {{Form::hidden('_method', 'PUT')}}
+                                            <input type="hidden" name="set_approve_status" value="1">
+                                        {{Form::submit('Approve book', ['class' => 'btn btn-primary btn-sm'])}}
+                                    {!! Form::close() !!}
+                                @else
+                                    <h5><span class="badge badge-success">Book approved</span></h5>
+                            @endif
+                        </td>
+                        <td>
+                            <ul>
+                                <li><button class="btn btn-warning">Edit</button> </li>
+                                <li>
+                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@deleteBook', $books->id], 'method' => 'POST']) !!}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                    {!! Form::close() !!}
+                                </li>
+                            </ul>
                         </td>
                     </tr>
                 </tbody>
