@@ -83,4 +83,9 @@ class Book extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getIsNewAttribute()
+    {
+        return now()->subDays(7) <= $this->created_at;
+    }
+
 }

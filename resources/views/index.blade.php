@@ -17,11 +17,11 @@
                     @if(count($books) > 0)
                         @foreach ($books as $book)
                             <div class="col">
-                                @if (\Carbon\Carbon::parse($book->created_at)->diffInDays(\Carbon\Carbon::now()) < 7)
-                                    <h3><span class="badge badge-warning new-product">New</span></h3>
+                                @if ($book->is_new)
+                                <span class="new-product"><span class="badge badge-warning">New</span></span>
                                 @endif
                                 @if ($book->discount != null)
-                                    <h4><span class="badge badge-info discount">{{$book->discount}}&percnt;</span></h4>
+                                    <span class="discount"><span class="badge badge-info">{{$book->discount}}&percnt;</span></span>
                                 @endif
                                 <a style="text-decoration: none; color: black" href="/book/{{$book->slug}}">
                                     <div class="">
