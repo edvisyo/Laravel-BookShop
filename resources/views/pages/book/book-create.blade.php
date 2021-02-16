@@ -8,12 +8,12 @@
             @csrf
             <div class="form-row">
                 <div class="col">
-                    {{Form::label('authors', 'Authors (Full-Name)*')}}
-                    {{Form::text('authors', null, ['class' => 'form-control'])}}
+                    {{Form::label('authors', 'Authors (Full-Name, should be seperated by comma)*')}}
+                    {{Form::text('authors', null, ['class' => 'form-control', 'placeholder' => 'e.g. john doe, ...'])}}
                 </div>
                 <div class="col">
-                    {{Form::label('genres', 'Genre (should be seperated by comma)* type ID for now')}}
-                    {{Form::text('genres', null, ['class' => 'form-control'])}}
+                    {{Form::label('genres', 'Genre (should be seperated by comma)*')}}
+                    {{Form::text('genres', null, ['class' => 'form-control', 'placeholder' => 'e.g. romance, ...'])}}
                 </div>
             </div>
             <div class="form-group">

@@ -40,7 +40,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::with('authors')->where('approved', '!=', '0')->paginate(25);
+        $books = Book::with('authors')->where('approved', '!=', '0')->paginate();
         return view('index')->with('books', $books);
         // $books = Book::with('authors')->get();
         // return view('index')->with('books', $books);
@@ -83,9 +83,11 @@ class BooksController extends Controller
             'cover' => $request->file('cover')->store('images', 'public')
         ]);
         
-        
-        
-        $book->genres()->attach($request->input('genres'));
+        $genres = explode(',', $request->input('genres'));
+        foreach ($genres as $genreName) {
+            $genre = Genre::updateOrCreate(['name' => $genreName]);
+            $book->genres()->attach($genre->id);
+        }
 
         $authors = explode(',', $request->input('authors'));
         foreach ($authors as $authorName) {

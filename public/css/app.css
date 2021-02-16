@@ -69,6 +69,10 @@ ul li {
   display: block;
 }
 
+.book-old-price b {
+  text-decoration: line-through;
+}
+
 .new-product {
   position: absolute;
   font-size: 1.7em;
@@ -78,6 +82,11 @@ ul li {
   position: absolute;
   font-size: 1.5em;
   margin-left: 14vh;
+}
+
+.create-user-form-container {
+  margin: auto;
+  width: 75%;
 }
 
 /*!

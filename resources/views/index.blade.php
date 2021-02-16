@@ -35,15 +35,22 @@
                                         <span>{{$author->fullname}}</span>
                                     </div>
                                 @endforeach
-                                    <div class="book-price">
+                                    @if ($book->discount != null)
+                                        <div class="book-old-price">
+                                            <b>{{$book->price}} &euro;</b>
+                                        </div>
+                                            <b>{{$book->getPriceWithDiscount()}} &euro;</b>
+                                    @else
                                         <b>{{$book->price}} &euro;</b>
-                                    </div>
+                                    @endif
                                 </a>
                             </div>
                         @endforeach
-                        {{$books->links()}}  
                     @endif
                 </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                {{ $books->links() }}
             </div>
         </div>  
     </div>
