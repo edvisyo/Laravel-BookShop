@@ -79,6 +79,7 @@ class AdminController extends Controller
     {        
         $user = new User();
         $role = $request->input('user_role');
+        $user->username = $request->input('username');
         $user->birthdate = $request->input('birthdate');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));

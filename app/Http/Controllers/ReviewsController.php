@@ -18,18 +18,12 @@ class ReviewsController extends Controller
        ]);
 
        $bookReviewComment = new Review();
-       $bookReviewPivot = new BookReview();
        
        $bookReviewComment->book_id = $request->input('book_id');
        $bookReviewComment->user_id = $user_id;
+       $bookReviewComment->stars = $request->input('stars');
        $bookReviewComment->comment = $request->input('comment');
        $bookReviewComment->save();
-       
-       $bookReviewPivot->book_id = $request->input('book_id');
-       $lastId = $bookReviewComment->id;
-       $bookReviewPivot->review_id = $lastId;
-       
-        $bookReviewPivot->save();
 
        return redirect()->back();
     }

@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id' => '1',
+                'username' => 'User',
                 'birthdate' => '1999-08-14',
                 'email' => 'test@gmail.com',
                 'email_verified_at' => '',
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
             ], 
             [
                 'id' => '2',
+                'username' => 'Admin',
                 'birthdate' => '1989-01-18',
                 'email' => 'admin@gmail.com',
                 'email_verified_at' => '',
