@@ -15,30 +15,19 @@
                         <h2>{{$singleBook->title}}</h2>
                     </div>
                     <hr>
-                    {{-- <div class="container d-flex justify-content-end">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="stars">
-                                    <form action=""> <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label> <input class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label> </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <ul>
                         @foreach ($singleBook->authors as $author)
                             <li><h5>{{$author->fullname}}</h5></li>
                         @endforeach
-                        <li>
-                            {{-- <div class="container d-flex justify-content-end">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="stars">
-                                            <form action=""> <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label> <input class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label> </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+                        <li class="book-average-rating mr-3">
+                            <strong>Rating: </strong>
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < $singleBook->getAverageBookRating())
+                                    <i class="fas fa-star rating-star-color star-resize"></i>
+                                @else
+                                    <i class="far fa-star empty-rating-star star-resize"></i>
+                                @endif
+                            @endfor
                         </li>
                     </ul>
                     <ul>
@@ -110,7 +99,6 @@
                                     <small>{{$review->created_at->todatestring()}}</small>
                                 </div>
                             </div>
-                            {{-- {{$review->getAverageBookRating()}} --}}
                         </div>
                         <div class="comment mt-2">
                             <p>{{$review->comment}}</p>

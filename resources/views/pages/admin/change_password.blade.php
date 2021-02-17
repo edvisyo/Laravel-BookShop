@@ -6,7 +6,7 @@
             <a class="btn btn-default mb-4" href="{{ route('admin_page')}}">Back</a>
         </div>
         <h3 class="mb-4">Change password:</h3>
-        {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@updatePassword', Auth()->user()->id], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@changePassword', Auth()->user()->id], 'method' => 'POST']) !!}
             @csrf
             @method('PUT')
                 <div class="form-group">

@@ -41,7 +41,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function updateEmailView()
+    public function changeEmailView()
     {
         return view('pages.admin.change_email');
     }
@@ -55,12 +55,12 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function updatePasswordView()
+    public function changePasswordView()
     {
         return view('pages.admin.change_password');
     }
 
-    public function updatePassword(Request $request, $id)
+    public function changePassword(Request $request, $id)
     {
         $user = User::find($id);
         $user->password = Hash::make($request->input('new_password'));

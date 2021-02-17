@@ -31,10 +31,10 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');
-        Route::get('/change-email', [AdminController::class, 'updateEmailView'])->name('admin_email_update');
+        Route::get('/change-email', [AdminController::class, 'changeEmailView'])->name('admin_change_email');
         Route::put('/change-email{id}', [AdminController::class, 'updateEmail']);
-        Route::get('/change-password', [AdminController::class, 'updatePasswordView'])->name('admin_password_update');
-        Route::put('/change-password/{id}', [AdminController::class, 'updatePassword']);
+        Route::get('/change-password', [AdminController::class, 'changePasswordView'])->name('admin_change_password');
+        Route::put('/change-password/{id}', [AdminController::class, 'changePassword']);
         Route::get('/create-new-user', [AdminController::class, 'createNewUserView'])->name('create_new_user');
         Route::post('/create-new-user', [AdminController::class, 'createNewUser']);
         Route::delete('/{id}', [AdminController::class, 'deleteBook']);
@@ -44,8 +44,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'user', 'prefix' => 'user'], function() {
         Route::get('/', [UserController::class, 'index'])->name('user_page');
         Route::delete('/{id}', [UserController::class, 'deleteBook']);
-        Route::get('/change-email', [UserController::class, 'updateEmailView'])->name('user_email_update');
-        Route::put('/change-email/{id}', [UserController::class, 'updateEmail']);
+        Route::get('/change-email', [UserController::class, 'changeEmailView'])->name('user_change_email');
+        Route::put('/change-email/{id}', [UserController::class, 'changeEmail']);
     });
 });
 

@@ -40,10 +40,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::with('authors')->where('approved', '!=', '0')->paginate();
+        $books = Book::with('authors')->approved()->paginate();
         return view('index')->with('books', $books);
-        // $books = Book::with('authors')->get();
-        // return view('index')->with('books', $books);
     }
 
     /**
@@ -114,10 +112,10 @@ class BooksController extends Controller
         return view('pages.book.book-review')->with('singleBook', $singleBook);
     }
 
-    public function getBookReviews(request $request)
-    {
+    // public function getBookReviews(request $request)
+    // {
         
-    }
+    // }
 
     /**
      * Show the form for editing the specified resource.

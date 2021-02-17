@@ -24,13 +24,13 @@ class UserController extends Controller
     }
 
     
-    public function updateEmailView()
+    public function changeEmailView()
     {
         return view('pages.user.change_email');
     }
 
 
-    public function updateEmail(Request $request, $id)
+    public function changeEmail(Request $request, $id)
     {
         $user = User::find($id);
         $user->email = $request->input('new_email');

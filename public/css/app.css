@@ -142,6 +142,15 @@ label.star:before {
   color: #4A148C;
 }
 
+.book-average-rating {
+  position: absolute;
+  right: 0;
+}
+
+.star-resize {
+  font-size: 25px;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

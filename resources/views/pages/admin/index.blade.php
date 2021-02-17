@@ -7,10 +7,10 @@
     
     <ul class="nav nav-tabs mb-1">
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('admin_email_update') }}">Change email</a>
+          <a class="nav-link" href="{{ route('admin_change_email') }}">Change email</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('admin_password_update') }}">Change password</a>
+          <a class="nav-link" href="{{ route('admin_change_password') }}">Change password</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('create_new_user') }}">Create new user</a>

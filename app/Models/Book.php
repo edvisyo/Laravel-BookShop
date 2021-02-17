@@ -101,4 +101,14 @@ class Book extends Model
         return $final_sum;
     }
 
+    public function scopeApproved($query)
+    {
+        return $query->where('approved', true);
+    }
+
+    public function getAverageBookRating()
+    {
+        return $this->reviews->avg('stars');
+    }
+
 }

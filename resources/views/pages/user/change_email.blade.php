@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@updateEmail', Auth()->user()->id], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@changeEmail', Auth()->user()->id], 'method' => 'POST']) !!}
             @csrf
             @method('PUT')
                 <div class="form-group">
