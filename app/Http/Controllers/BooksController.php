@@ -41,16 +41,38 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
+        // if($request->has('search'))
+        // {
+        //     $search = $request->get('search');
+        //     Cookie::queue('search' ,$search, (60 * 15));
+
+        //     $books = Book::with(['authors' => function($query) use($search) {
+        //     return $query->where('fullname', 'LIKE','%'.$search.'%');
+        //     }])
+        //     ->where('title','LIKE','%'.$search.'%')
+        //     ->with('authors')
+        //     ->approved()
+        //     ->paginate();
+        // } else {
+        //     $books = Book::with('authors')->approved()->paginate();
+        // }
+
+        // return view('index')->with('books', $books);
+
         if($request->has('search'))
         {
             $search = $request->get('search');
             Cookie::queue('search' ,$search, (60 * 15));
-            $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%')->paginate();
+
+            $books = Book::where('title', 'LIKE', '%' .$search. '%')
+            ->orWhereHas('authors', function($query) use ($search) {
+                return $query->where('fullname', 'LIKE', '%' . $search . '%');
+            })->approved()->paginate();
         } else {
             $books = Book::with('authors')->approved()->paginate();
         }
 
-        return view('index')->with('books', $books);
+        return view('index')->with('books', $books);  
     }
 
     /**

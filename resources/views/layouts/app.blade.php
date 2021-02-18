@@ -44,7 +44,7 @@
                         {!! Form::open(['action' => 'App\Http\Controllers\BooksController@index', 'method' => 'GET']) !!}
                             <div class="form-inline">
                                 {{Form::search('search', Cookie::get('search'), ['class' => 'form-control mr-sm-2', 'placeholder' => 'author, title..'])}}
-                                {{Form::submit('Submit', ['class' => 'btn btn-outline-dark my-2 my-sm-0'])}}
+                                {{Form::submit('Search', ['class' => 'btn btn-outline-dark my-2 my-sm-0'])}}
                             </div>
                         {!! Form::close() !!}
                     </ul>

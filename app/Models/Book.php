@@ -43,20 +43,8 @@ class Book extends Model
         //                  'books.price',
         //                  'books.cover',
         //                  'users.email AS user')
-        // ->where('slug', $slug)->get()->first();
-        
-        // $data = DB::table('books')
-        //         ->join('users', 'users.id', '=', 'books.user_id')
-        //         ->select('books.id', 
-        //                  'books.user_id', 
-        //                  'books.title',
-        //                  'books.slug',
-        //                  'books.description',
-        //                  //'books.authors',
-        //                  'books.price',
-        //                  'books.cover',
-        //                  'users.email AS user')
-        //                  ->where('slug', $slug)->get()->first();
+        // ->where('slug', $slug)->first();
+
         return $data;
     }
 
@@ -79,7 +67,7 @@ class Book extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class)->latest('created_at');
     }
 
     // public function users()
