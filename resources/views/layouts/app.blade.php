@@ -41,7 +41,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        {!! Form::open(['action' => 'App\Http\Controllers\BooksController@index', 'method' => 'GET']) !!}
+                            <div class="form-inline">
+                                {{Form::search('search', Cookie::get('search'), ['class' => 'form-control mr-sm-2', 'placeholder' => 'author, title..'])}}
+                                {{Form::submit('Submit', ['class' => 'btn btn-outline-dark my-2 my-sm-0'])}}
+                            </div>
+                        {!! Form::close() !!}
                     </ul>
 
                     <!-- Right Side Of Navbar -->

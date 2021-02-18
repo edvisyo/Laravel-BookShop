@@ -18,18 +18,14 @@ use App\Http\Controllers\User\UserController;
 */
 
 Route::resource('/', BooksController::class);
-// Route::get('/', [BooksController::class, 'index']);
-
-// Route::get('/', [BooksController::class, 'getBooks']);
 Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
-Route::post('/book', [ReviewsController::class, 'storeBookReview']);
-
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //Route::resource('/book', BooksController::class);
+    Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
-    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
+        Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');
         Route::get('/change-email', [AdminController::class, 'changeEmailView'])->name('admin_change_email');
         Route::put('/change-email{id}', [AdminController::class, 'updateEmail']);

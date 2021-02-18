@@ -10,6 +10,7 @@ use App\Models\AuthorBook;
 use App\Models\BookGenre;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
+use Cookie;
 
 class BooksController extends Controller
 {
@@ -38,9 +39,17 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::with('authors')->approved()->paginate();
+        if($request->has('search'))
+        {
+            $search = $request->get('search');
+            Cookie::queue('search' ,$search, (60 * 15));
+            $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%')->paginate();
+        } else {
+            $books = Book::with('authors')->approved()->paginate();
+        }
+
         return view('index')->with('books', $books);
     }
 
@@ -111,6 +120,15 @@ class BooksController extends Controller
         $singleBook = $this->bookRepository->getBookBySlug($request);
         return view('pages.book.book-review')->with('singleBook', $singleBook);
     }
+
+
+    // public function search(Request $request)
+    // {
+    //     $search = $request->get('search');
+    //     // $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%', 'OR', 'authors', 'LIKE', '%'.$search.'%')->paginate();
+    //     $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%')->paginate();
+    //     return view('index')->with('books', $books);
+    // }
 
     // public function getBookReviews(request $request)
     // {
