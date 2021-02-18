@@ -57,5 +57,13 @@ class LoginController extends Controller
                 return redirect('/user');
             }
         }
+
+        $remember_me = $request->has('remember') ? true : false; 
+        if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me))
+        {
+            $user = auth()->user();
+        }else{
+            return back()->with('error','your username and password are wrong.');
+        }
     }
 }

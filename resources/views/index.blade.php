@@ -37,11 +37,11 @@
                                 @endforeach
                                     @if ($book->discount != null)
                                         <div class="book-old-price">
-                                            <b>{{$book->price}} &euro;</b>
+                                            <b>{{number_format($book->price).","."00"}} &euro;</b>
                                         </div>
                                             <b>{{$book->getPriceWithDiscount()}} &euro;</b>
                                     @else
-                                        <b>{{$book->price}} &euro;</b>
+                                        <b>{{number_format($book->price).","."00"}} &euro;</b>
                                     @endif
                                 </a>
                             </div>

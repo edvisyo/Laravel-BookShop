@@ -95,13 +95,8 @@ ul {
 
 // Rating stars 
 div.stars {
-    // width: 250px;
     display: inline-block;
 }
-
-// .mt-200 {
-//     margin-top: 200px
-// }
 
 input.star {
     display: none;
@@ -141,18 +136,15 @@ label.star:before {
 // End rating Stars
 
 
-
 .custom-submit-button {
     width: 30%;
 }
 
 .rating-star-color {
-    // color: #f9c74f;
     color: #FD4;
 }
 
 .empty-rating-star {
-    // color: #5e6472;
     color: #4A148C;
 }
 
