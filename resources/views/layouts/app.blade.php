@@ -43,7 +43,7 @@
                     <ul class="navbar-nav mr-auto">
                         {!! Form::open(['action' => 'App\Http\Controllers\BooksController@index', 'method' => 'GET']) !!}
                             <div class="form-inline">
-                                {{Form::search('search', Cookie::get('search'), ['class' => 'form-control mr-sm-2', 'placeholder' => 'author, title..'])}}
+                                {{Form::search('search', Cookie::get('search'), ['class' => 'form-control mr-md-2', 'placeholder' => 'author, title..'])}}
                                 {{Form::submit('Search', ['class' => 'btn btn-outline-dark my-2 my-sm-0'])}}
                             </div>
                         {!! Form::close() !!}
@@ -105,6 +105,7 @@
             </div>
             @endif
 
+            @include('includes.messages')
             @yield('content')
         </main>
     </div>

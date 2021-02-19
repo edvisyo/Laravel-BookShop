@@ -5,6 +5,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Mail\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ use App\Http\Controllers\User\UserController;
 
 Route::resource('/', BooksController::class);
 Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
+
+Route::get('/book/{slug}/report', [MailController::class, 'emailTemplate'])->name('book_report');
+Route::post('/book/{slug}/report', [MailController::class, 'sendReportMessage']);
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
@@ -42,6 +46,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('/{id}', [UserController::class, 'deleteBook']);
         Route::get('/change-email', [UserController::class, 'changeEmailView'])->name('user_change_email');
         Route::put('/change-email/{id}', [UserController::class, 'changeEmail']);
+        //Route::get('/book/report/{id}', [MailController::class, 'emailTemplate'])->name('book_report');
+        //Route::post('/book-report/{id}', [MailController::class, 'sendReportMessage']);
     });
 });
 

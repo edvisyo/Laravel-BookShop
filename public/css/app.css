@@ -151,6 +151,12 @@ label.star:before {
   font-size: 25px;
 }
 
+.book-report-link {
+  position: absolute;
+  right: 0;
+  color: black;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

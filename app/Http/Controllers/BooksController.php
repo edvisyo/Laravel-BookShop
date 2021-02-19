@@ -11,7 +11,7 @@ use App\Models\BookGenre;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
 use Cookie;
-
+use Auth;
 class BooksController extends Controller
 {
 
@@ -72,7 +72,7 @@ class BooksController extends Controller
             $books = Book::with('authors')->approved()->paginate();
         }
 
-        return view('index')->with('books', $books);  
+        return view('index', compact('books')); 
     }
 
     /**
@@ -124,7 +124,7 @@ class BooksController extends Controller
             $book->authors()->attach($author->id);
         }
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Your book is uploaded and waiting for approvement.');
     }
 
     /**
