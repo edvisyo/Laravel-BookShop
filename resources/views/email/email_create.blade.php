@@ -2,6 +2,7 @@
 
 @section('content')
         <div class="container">
+            <a class="btn btn-default mb-4" href="{{ URL::previous() }}">Back</a>
             <h3 class="mb-4">Report page</h3>
             <div class="card" style="width: 100%">
                 <div class="report-container" style="padding: 23px;">

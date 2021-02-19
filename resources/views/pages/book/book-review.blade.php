@@ -109,40 +109,5 @@
             @empty
                 <span>This book do not have a review..</span>
             @endforelse
-
-            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-              </button> --}}
-
-                {{-- Report Modal --}}
-                {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Book Report</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            {!! Form::open(['action' => 'App\Http\Controllers\ReviewsController@storeBookReview', 'method' => 'post']) !!}
-                                <input type="hidden" name="book_id" value="{{$singleBook->id}}">                            
-                                <div class="form-group">
-                                    BOOK NAME: {{Form::text('book_title', ($singleBook->title), ['class' => 'form-control', 'placeholder' => 'Leave your comment about this book here..'])}}
-                                </div> --}}
-                                    {{-- URL: <a href="/book/{{$singleBook->slug}}">{{$singleBook->slug}}</a>
-                                    {{Form::text('report-message', "/book/`($singleBook->slug)`", ['class' => 'form-control', 'placeholder' => 'Leave your message here..'])}} --}}
-                                {{-- <div class="form-group">
-                                    YOUR REPORT MESSAGE: {{Form::textarea('report_message', null, ['class' => 'form-control', 'rows' => 5, 'placeholder' => 'Leave your message here..'])}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {{Form::submit('Save changes', ['class' => 'btn btn-primary'])}}
-                                </div>
-                            {!! Form::close() !!}
-                        </div>
-                      </div>
-                    </div>
-                  </div>     --}}
     </div>
 @endsection

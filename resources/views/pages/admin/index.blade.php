@@ -26,6 +26,7 @@
             <th scope="col">Authors</th>
             <th scope="col">Genres</th>
             <th scope="col">Price</th>
+            <th scope="col">Uploaded</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -56,6 +57,7 @@
                             </ul>
                         </td>
                         <td>{{$books->price}} &euro;</td>
+                        <td>{{$books->created_at}}</td>
                         <td>
                              @if ($books->approved == 0)
                                     {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@approveBook', $books->id], 'method' => 'POST']) !!}
@@ -69,7 +71,7 @@
                         </td>
                         <td>
                             <ul>
-                                <li><button class="btn btn-warning">Edit</button> </li>
+                                <li><a type="button" class="btn btn-warning" href="{{ route('update_book', $books->slug) }}">Edit</a></li>
                                 <li>
                                     {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@deleteBook', $books->id], 'method' => 'POST']) !!}
                                         {{Form::hidden('_method', 'DELETE')}}

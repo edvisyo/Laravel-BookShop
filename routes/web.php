@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/create-new-user', [AdminController::class, 'createNewUser']);
         Route::delete('/{id}', [AdminController::class, 'deleteBook']);
         Route::put('/{id}', [AdminController::class, 'approveBook']);
+        Route::get('/book/{slug}/update', [AdminController::class, 'updateBookView'])->name('update_book');
+        Route::put('/book/{slug}/update', [AdminController::class, 'updateBook']);
     });
     
     Route::group(['middleware' => 'user', 'prefix' => 'user'], function() {

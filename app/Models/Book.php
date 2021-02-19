@@ -30,7 +30,7 @@ class Book extends Model
     public function getBookBySlug($slug)
     {   
         //$data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
-        $data = Book::with('authors', 'genres', 'reviews')->where('slug', $slug)->firstOrFail();
+        $data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
         
         // $data = Book::with('authors', 'genres', 'reviews')
         // ->join('reviews', 'reviews.user_id', '=', 'books.user_id')
@@ -70,10 +70,10 @@ class Book extends Model
         return $this->hasMany(Review::class)->latest('created_at');
     }
 
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getIsNewAttribute()
     {

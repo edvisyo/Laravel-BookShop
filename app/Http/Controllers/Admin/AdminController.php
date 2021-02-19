@@ -90,4 +90,23 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function updateBookView($slug)
+    {
+        $book = Book::with('authors', 'users', 'genres')->where('slug', '=', $slug)->firstOrFail();
+        return view('pages.admin.book_update')->with('book', $book);
+    }
+
+    public function updateBook(Request $request, $slug)
+    {
+        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $book->title = $request->input('book_title');
+        $book->description = $request->input('book_description');
+        $book->price = $request->input('book_price');
+        $book->discount = $request->input('book_discount');
+
+        $book->save();
+
+        return redirect()->back();
+    }
 }
