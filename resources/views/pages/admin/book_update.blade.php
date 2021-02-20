@@ -75,20 +75,31 @@
                           </div>
                         </div>
                       </div>
-                      {{-- <img  src="{{ URL::asset($book->cover) }}" alt="User book">
-                      <div class="form-group">
-                        {{Form::label('cover', 'Book cover')}}
-                        {{Form::file('cover', null, ['class' => 'form-control'])}}
-                      </div> --}}
+                      
                       <div class="row">
                         <div class="col">
                           <img  src="{{ URL::asset($book->cover) }}" alt="User book">
                         </div>
-                        <div class="col">
+                        {{-- <div class="col">
+                          <div class="uploaded-image-preview">
+                            <span>New Image:</span>
+                            <img class="uploaded-image-preview-resize" id="uploadedImage" src="#" alt="your image" />
+                          </div>
                           <div class="form-group">
                             {{Form::label('book_cover', 'Change book cover:')}}
                             {{Form::file('book_cover', null, ['class' => 'form-control'])}}
                           </div>
+                        </div> --}}
+                        
+                        <div class="uploaded-image-preview">
+                          <div class="">
+                            <span>New Book Image:</span>
+                          </div>
+                          <img class="uploaded-image-preview-resize mr-3" id="uploadedImage" src="#" alt="your image" />
+                        </div>
+                        <div class="form-group">
+                          {{Form::label('book_cover', 'Change book cover:')}}
+                          {{Form::file('book_cover', null, ['class' => 'form-control'])}}
                         </div>
                       </div>
                       <div class="row justify-content-end mt-5">

@@ -4,7 +4,7 @@
     <div class="container">
         <h3>Create book page</h3>
         <hr>
-        {!! Form::open(['action' => 'App\Http\Controllers\BooksController@store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['action' => 'App\Http\Controllers\Books\BooksController@store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
             @csrf
             <div class="form-row">
                 <div class="col">
@@ -29,10 +29,19 @@
                 {{Form::text('price', null, ['class' => 'form-control'])}}
             </div>
             <div class="form-group">
-                {{Form::label('cover', 'Book cover')}}
-                {{Form::file('cover', null, ['class' => 'form-control'])}}
+                {{Form::label('book_cover', 'Book cover')}}
+                {{Form::file('book_cover', null, ['class' => 'form-control'])}}
             </div>
-            {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
+
+            <div class="uploaded-image-preview">
+                <div class="">
+                  <span>Book Cover Image:</span>
+                </div>
+                <img class="uploaded-image-preview-resize mr-3" id="uploadedImage" src="#" alt="your image" />
+              </div>
+            <div class="row justify-content-center">
+                {{Form::submit('Submit', ['class' => 'btn btn-success custom-submit-button'])}}
+            </div>
         {!! Form::close() !!}
     </div>
 @endsection

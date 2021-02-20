@@ -62,7 +62,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <hr>
-            {!! Form::open(['action' => 'App\Http\Controllers\ReviewsController@storeBookReview', 'method' => 'post']) !!}
+            {!! Form::open(['action' => 'App\Http\Controllers\Reviews\ReviewsController@storeBookReview', 'method' => 'post']) !!}
             <input type="hidden" name="book_id" value="{{$singleBook->id}}">
             
             <div class="rate-this-book">

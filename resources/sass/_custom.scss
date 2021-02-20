@@ -162,3 +162,12 @@ label.star:before {
     right: 0;
     color: black
 }
+
+.uploaded-image-preview {
+    display: none;
+}
+
+.uploaded-image-preview-resize {
+    height: 400px;
+    width: 230px;
+}

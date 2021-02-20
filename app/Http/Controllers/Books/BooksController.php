@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Books;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
@@ -102,12 +103,12 @@ class BooksController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'cover' => 'required'
+            'book_cover' => 'required'
         ]);
 
-        if($request->hasFile('cover'))
+        if($request->hasFile('book_cover'))
         {
-            $file = $request->file('cover');
+            $file = $request->file('book_cover');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('uploads/covers/',$filename);

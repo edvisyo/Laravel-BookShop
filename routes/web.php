@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BooksController;
-use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\Books\BooksController;
+use App\Http\Controllers\Reviews\ReviewsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Mail\MailController;

@@ -157,6 +157,15 @@ label.star:before {
   color: black;
 }
 
+.uploaded-image-preview {
+  display: none;
+}
+
+.uploaded-image-preview-resize {
+  height: 400px;
+  width: 230px;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
