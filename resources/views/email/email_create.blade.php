@@ -8,7 +8,7 @@
                 <div class="report-container" style="padding: 23px;">
                 <div class="row" >
                         <div class="col-4">
-                            <img style="width: 230px; border-radius: 3px" src="{{ URL::asset('storage/'.$book->cover) }}" alt="book cover image">
+                            <img style="width: 230px; border-radius: 3px" src="{{ URL::asset($book->cover) }}" alt="book cover image">
                         </div>
                         <div class="col">
                             <h5 class="mt-4">Report for book: <strong style="text-transform: capitalize">{{ $book->title }}</strong></h5>

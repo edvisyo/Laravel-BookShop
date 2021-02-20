@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\Book;
 
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function deleteBook($id)
     {
         $book = Book::find($id);
-        unlink('storage/'.$book->cover);
+        File::delete($book->cover);
         $book->delete();
 
         return redirect()->back();

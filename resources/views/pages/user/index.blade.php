@@ -23,7 +23,7 @@
                 @foreach ($user_books as $user_book)
                     <tbody>
                         <tr>
-                            <th><img class="user-book-image" src="{{ URL::asset('storage/'.$user_book->cover) }}" alt="User book"></th>
+                            <th><img class="user-book-image" src="{{ URL::asset($user_book->cover) }}" alt="User book"></th>
                             <td><p class="genre-name">{{$user_book->title}}</p></td>
                             <td>{{$user_book->description}}</td>
                             <td>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use App\Models\Book;
 use App\Models\Role;
 use App\Models\User;
@@ -36,6 +38,7 @@ class AdminController extends Controller
     public function deleteBook($id)
     {
         $book = Book::find($id);
+        File::delete($book->cover);
         $book->delete();
 
         return redirect()->back();
@@ -100,6 +103,28 @@ class AdminController extends Controller
     public function updateBook(Request $request, $slug)
     {
         $book = Book::where('slug', '=', $slug)->firstOrFail();
+
+        if($request->file('book_cover') != null)
+        {
+            $path = public_path('uploads/covers/');
+            
+            //code for remove old file
+            if($book->cover != '' && $book->cover != null)
+            {
+                File::delete($book->cover);
+            }
+
+            //upload new file
+            $cover = $request->file('book_cover');
+            $extension = $cover->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $cover->move($path, $filename);
+            $resizedImage = Image::make(public_path('uploads/covers/'.$filename))
+            ->fit(180, 280)->save();
+            //for update in table
+            $book->update(['cover' => 'uploads/covers/'.$filename]);
+        }
+
         $book->title = $request->input('book_title');
         $book->description = $request->input('book_description');
         $book->price = $request->input('book_price');

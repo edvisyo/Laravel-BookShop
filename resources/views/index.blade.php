@@ -25,7 +25,7 @@
                                 @endif
                                 <a style="text-decoration: none; color: black" href="/book/{{$book->slug}}">
                                     <div class="">
-                                        <img class="book-image" src="{{ URL::asset('storage/'.$book->cover) }}">
+                                        <img class="book-image" src="{{ URL::asset($book->cover) }}" alt="User book">
                                     </div>
                                 <div class="book-title">
                                     <h4>{{$book->title}}</h4>

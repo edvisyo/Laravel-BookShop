@@ -4,7 +4,7 @@
     <div class="container">
         <a class="btn btn-default mb-4" href="{{ route('admin_page') }}">Back</a>
         <h3 class="mb-4 ml-3">Update Book: <strong style="text-transform: capitalize">{{$book->title}}</strong></h3>
-        {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@updateBook', $book->slug], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@updateBook', $book->slug], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             {{-- <input type="hidden" name="book_slug" value="{{ $book->slug }}">
                 <div class="form-group mt-4">
                     {{Form::hidden('book_title', ($book->title), ['class' => 'form-control', 'placeholder' => 'Leave your comment about this book here..'])}}
@@ -75,11 +75,27 @@
                           </div>
                         </div>
                       </div>
-                      <img  src="{{ URL::asset('storage/'.$book->cover) }}" alt="User book">
+                      {{-- <img  src="{{ URL::asset($book->cover) }}" alt="User book">
+                      <div class="form-group">
+                        {{Form::label('cover', 'Book cover')}}
+                        {{Form::file('cover', null, ['class' => 'form-control'])}}
+                      </div> --}}
+                      <div class="row">
+                        <div class="col">
+                          <img  src="{{ URL::asset($book->cover) }}" alt="User book">
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{Form::label('book_cover', 'Change book cover:')}}
+                            {{Form::file('book_cover', null, ['class' => 'form-control'])}}
+                          </div>
+                        </div>
+                      </div>
                       <div class="row justify-content-end mt-5">
                         {{Form::hidden('_method', 'PUT')}}
                         {{Form::submit('Update Book', ['class' => 'btn btn-outline-dark mr-3'])}}
                     </div>
         {!! Form::close() !!}
     </div>
+</div>
 @endsection

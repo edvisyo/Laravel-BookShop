@@ -7,11 +7,13 @@
         </div>
         <div class="book-review">
             <div class="row">
-                <div class="col">
-                    <img class="book-review-image" src="{{ URL::asset('storage/'.$singleBook->cover) }}" alt="book cover image">
+                <div class="col-5">
+                    <img class="book-review-image" src="{{ URL::asset($singleBook->cover) }}" alt="book cover image">
                 </div>
                 <div class="col">
-                    <a href="/book/{{$singleBook->slug}}/report" class="book-report-link" style="color: black"><i class="far fa-paper-plane mr-3" style="text-decoration: underline; font-size: 17px"> Report book</i></a>
+                    @if(Auth()->user() !== null)
+                        <a href="/book/{{$singleBook->slug}}/report" class="book-report-link" style="color: black"><i class="far fa-paper-plane mr-3" style="text-decoration: underline; font-size: 17px"> Report book</i></a>
+                    @endif
                     <div class="single-book-title">
                         <h2>{{$singleBook->title}}</h2>
                     </div>

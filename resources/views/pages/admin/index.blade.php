@@ -37,7 +37,7 @@
                     <tr>
                         <th>
                             <a href="/book/{{$books->slug}}">
-                            <img class="user-book-image" src="{{ URL::asset('storage/'.$books->cover) }}" alt="User book">
+                                <img class="user-book-image" src="{{ URL::asset($books->cover) }}" alt="User book">
                             </a>
                         </th>
                         <td><p class="genre-name">{{$books->title}}</p></td>

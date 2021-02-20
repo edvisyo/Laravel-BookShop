@@ -12,6 +12,8 @@ use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
 use Cookie;
 use Auth;
+use Intervention\Image\Facades\Image;
+
 class BooksController extends Controller
 {
 
@@ -102,6 +104,19 @@ class BooksController extends Controller
             'price' => 'required',
             'cover' => 'required'
         ]);
+
+        if($request->hasFile('cover'))
+        {
+            $file = $request->file('cover');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads/covers/',$filename);
+
+            $resizedImage = Image::make(public_path('uploads/covers/'.$filename))
+            ->fit(180, 280)->save();
+        } else {
+            $filename = 'default.jpg';
+        }
         
         $book = auth()->user()->book()->create([
             'title' => $request['title'],
@@ -109,7 +124,7 @@ class BooksController extends Controller
             'slug' => $slug,
             'description' => $request['description'],
             'price' => $request['price'],
-            'cover' => $request->file('cover')->store('images', 'public')
+            'cover' => 'uploads/covers/'.$filename
         ]);
         
         $genres = explode(',', $request->input('genres'));
