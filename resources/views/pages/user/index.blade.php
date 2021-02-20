@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <ul>
-                                    <li><button class="btn btn-warning">Edit</button></li>
+                                    <li><a type="button" class="btn btn-warning" href="{{ route('user_update_book', $user_book->slug) }}">Edit</a></li>
                                     <li>
                                         {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@deleteBook', $user_book->id], 'method' => 'POST']) !!}
                                                 {{Form::hidden('_method', 'DELETE')}}

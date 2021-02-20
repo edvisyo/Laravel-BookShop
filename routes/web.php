@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('/{id}', [UserController::class, 'deleteBook']);
         Route::get('/change-email', [UserController::class, 'changeEmailView'])->name('user_change_email');
         Route::put('/change-email/{id}', [UserController::class, 'changeEmail']);
+        Route::get('/book/{slug}/update', [UserController::class, 'updateBookView'])->name('user_update_book');
+        Route::put('/book/{slug}/update', [UserController::class, 'updateBook']);
         //Route::get('/book/report/{id}', [MailController::class, 'emailTemplate'])->name('book_report');
         //Route::post('/book-report/{id}', [MailController::class, 'sendReportMessage']);
     });
