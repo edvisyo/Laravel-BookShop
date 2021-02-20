@@ -10,8 +10,8 @@
             @csrf
             @method('PUT')
                 <div class="form-group">
-                    {{Form::label('new_password', 'New Password')}}
-                    {{Form::text('new_password', null, ['class' => 'form-control'])}}
+                    {{Form::label('password', 'New Password')}}
+                    {{Form::text('password', null, ['class' => 'form-control'])}}
                 </div>
                 {{Form::hidden('_method', 'PUT')}}
             {{Form::submit('Submit', ['class' => 'btn btn-success'])}}

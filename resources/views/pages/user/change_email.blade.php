@@ -6,8 +6,8 @@
             @csrf
             @method('PUT')
                 <div class="form-group">
-                    {{Form::label('new_email', 'New Email')}}
-                    {{Form::text('new_email', null, ['class' => 'form-control'])}}
+                    {{Form::label('email', 'New Email')}}
+                    {{Form::text('email', null, ['class' => 'form-control'])}}
                 </div>
                 {{Form::hidden('_method', 'PUT')}}
             {{Form::submit('Submit', ['class' => 'btn btn-success'])}}

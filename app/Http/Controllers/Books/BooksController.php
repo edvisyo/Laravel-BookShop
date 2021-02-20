@@ -121,7 +121,7 @@ class BooksController extends Controller
         
         $book = auth()->user()->book()->create([
             'title' => $request['title'],
-            $slug = Str::slug($request['title']),
+            $slug = Str::slug($request['title']). ' ' . Str::random(),
             'slug' => $slug,
             'description' => $request['description'],
             'price' => $request['price'],

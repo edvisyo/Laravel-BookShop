@@ -32,35 +32,35 @@
           </tr>
         </thead>
         @if (Count($books) > 0)
-            @foreach ($books as $books)
+            @foreach ($books as $book)
                 <tbody>
                     <tr>
                         <th>
-                            <a href="/book/{{$books->slug}}">
-                                <img class="user-book-image" src="{{ URL::asset($books->cover) }}" alt="User book">
+                            <a href="/book/{{$book->slug}}">
+                                <img class="user-book-image" src="{{ URL::asset($book->cover) }}" alt="User book">
                             </a>
                         </th>
-                        <td><p class="genre-name">{{$books->title}}</p></td>
-                        <td>{{$books->description}}</td>
+                        <td><p class="genre-name">{{$book->title}}</p></td>
+                        <td>{{$book->description}}</td>
                         <td>
                             <ul>
-                                @foreach ($books->authors as $author)
+                                @foreach ($book->authors as $author)
                                     <li class="user-books-authors-list">{{$author->fullname}}</li>
                                 @endforeach
                             </ul>
                         </td>
                         <td>
                             <ul>
-                                @foreach ($books->genres as $genre)
+                                @foreach ($book->genres as $genre)
                                     <li class="user-books-genres-list genre-name">{{$genre->name}}</li>
                                 @endforeach
                             </ul>
                         </td>
-                        <td>{{$books->price}} &euro;</td>
-                        <td>{{$books->created_at}}</td>
+                        <td>{{$book->price}} &euro;</td>
+                        <td>{{$book->created_at}}</td>
                         <td>
-                             @if ($books->approved == 0)
-                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@approveBook', $books->id], 'method' => 'POST']) !!}
+                             @if ($book->approved == 0)
+                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@approveBook', $book->id], 'method' => 'POST']) !!}
                                         {{Form::hidden('_method', 'PUT')}}
                                             <input type="hidden" name="set_approve_status" value="1">
                                         {{Form::submit('Approve book', ['class' => 'btn btn-primary btn-sm'])}}
@@ -71,9 +71,9 @@
                         </td>
                         <td>
                             <ul>
-                                <li><a type="button" class="btn btn-warning" href="{{ route('update_book', $books->slug) }}">Edit</a></li>
+                                <li><a type="button" class="btn btn-warning" href="{{ route('update_book', $book->slug) }}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@deleteBook', $books->id], 'method' => 'POST']) !!}
+                                    {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminController@deleteBook', $book->id], 'method' => 'POST']) !!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                     {!! Form::close() !!}
@@ -89,5 +89,8 @@
             </div>
         @endif
       </table>
+      <div class="row justify-content-center mt-5">
+        {{ $books->links() }}
+      </div>
 </div>
 @endsection

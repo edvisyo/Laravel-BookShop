@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChangeEmailRequest;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\Models\User;
@@ -21,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $user_id = Auth()->user()->id;
-        $user_books = Book::with('authors', 'genres')->where('user_id', '=', $user_id)->get();
+        $user_books = Book::with('authors', 'genres')->where('user_id', '=', $user_id)->latest()->paginate(15);
         return view('pages.user.index')->with('user_books', $user_books);
     }
 
@@ -32,13 +33,18 @@ class UserController extends Controller
     }
 
 
-    public function changeEmail(Request $request, $id)
+    public function changeEmail(ChangeEmailRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->email = $request->input('new_email');
-        $user->save();
+        if($request->validated())
+        {
+            $user = User::find($id);
+            $user->email = $request->input('email');
+            $user->save();
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Email changed successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error!');
+        }
     }
 
     public function deleteBook($id)
@@ -47,7 +53,7 @@ class UserController extends Controller
         File::delete($book->cover);
         $book->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Your book deleted!');
     }
 
 
@@ -89,6 +95,6 @@ class UserController extends Controller
 
         $book->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Your book successfully updated!');
     }
 }

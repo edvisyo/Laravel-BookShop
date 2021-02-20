@@ -67,5 +67,8 @@
                 </div>
             @endif
           </table>
+          <div class="row justify-content-center mt-5">
+            {{ $user_books->links() }}
+          </div>
     </div>
 @endsection

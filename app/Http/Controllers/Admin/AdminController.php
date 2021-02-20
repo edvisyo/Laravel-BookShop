@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\ChangeEmailRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -22,7 +25,7 @@ class AdminController extends Controller
     
     public function index()
     {
-        $books = Book::with('authors', 'genres')->orderBy('created_at', 'desc')->get();
+        $books = Book::with('authors', 'genres')->latest()->paginate(15);
         return view('pages.admin.index')->with('books', $books);
     }
 
@@ -41,7 +44,7 @@ class AdminController extends Controller
         File::delete($book->cover);
         $book->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Book deleted!');
     }
 
     public function changeEmailView()
@@ -49,13 +52,18 @@ class AdminController extends Controller
         return view('pages.admin.change_email');
     }
 
-    public function updateEmail(Request $request, $id)
+    public function updateEmail(ChangeEmailRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->email = $request->input('new_email');
-        $user->save();
+        if($request->validated())
+        {
+            $user = User::find($id);
+            $user->email = $request->input('email');
+            $user->save();
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Email updated!');
+        } else {
+            return redirect()->back()->with('error', 'Error!');
+        }
     }
 
     public function changePasswordView()
@@ -63,13 +71,17 @@ class AdminController extends Controller
         return view('pages.admin.change_password');
     }
 
-    public function changePassword(Request $request, $id)
+    public function changePassword(ChangePasswordRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->password = Hash::make($request->input('new_password'));
-        $user->save();
+        if($request->validated()) {
+            $user = User::find($id);
+            $user->password = Hash::make($request->input('new_password'));
+            $user->save();
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Password changed successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error!');
+        }
     }
 
     public function createNewUserView()
@@ -78,20 +90,25 @@ class AdminController extends Controller
         return view('pages.admin.create_new_user')->with('roles', $roles);
     }
 
-    public function createNewUser(Request $request)
+    public function createNewUser(CreateUserRequest $request)
     {        
-        $user = new User();
-        $role = $request->input('user_role');
-        $user->username = $request->input('username');
-        $user->birthdate = $request->input('birthdate');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
+        if($request->validated())
+        {
+            $user = new User();
+            $role = $request->input('user_role');
+            $user->username = $request->input('username');
+            $user->birthdate = $request->input('birthdate');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
 
-        $user->save();
+            $user->save();
 
-        $user->role()->attach($role);
+            $user->role()->attach($role);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'New user created successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error!');
+        }
     }
 
     public function updateBookView($slug)
@@ -132,6 +149,6 @@ class AdminController extends Controller
 
         $book->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Book successfully updated!');
     }
 }
