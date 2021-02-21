@@ -39,7 +39,32 @@ class Book_GenreTableSeeder extends Seeder
                 'id' => '5',
                 'book_id' => '5',
                 'genre_id' => '5'
-            ]     
+            ], 
+            [
+                'id' => '6',
+                'book_id' => '6',
+                'genre_id' => '3'
+            ], 
+            [
+                'id' => '7',
+                'book_id' => '6',
+                'genre_id' => '1'
+            ], 
+            [
+                'id' => '8',
+                'book_id' => '7',
+                'genre_id' => '1'
+            ], 
+            [
+                'id' => '9',
+                'book_id' => '7',
+                'genre_id' => '3'
+            ], 
+            [
+                'id' => '10',
+                'book_id' => '7',
+                'genre_id' => '5'
+            ]      
         ]);
     }
 }

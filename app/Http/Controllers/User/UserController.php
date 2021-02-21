@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChangeEmailRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Book;
 
@@ -42,6 +44,26 @@ class UserController extends Controller
             $user->save();
 
             return redirect()->back()->with('success', 'Email changed successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error!');
+        }
+    }
+
+    public function changePasswordView()
+    {
+        return view('pages.user.change_password');
+    }
+
+
+    public function changePassword(ChangePasswordRequest $request, $id)
+    {
+        if($request->validated())
+        {
+            $user = User::find($id);
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+
+            return redirect()->back()->with('success', 'Password changed successfully!');
         } else {
             return redirect()->back()->with('error', 'Error!');
         }

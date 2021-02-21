@@ -2,16 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="book-container">
-
-            {{-- @if (Auth()->user() != null)
-            <div class="row justify-content-end">
-                <a class="btn btn-primary mb-4 mr-4" href="{{ route('create')}}">
-                    Add Book To Listing
-                </a>
-            </div>
-            @endif --}}
-        
+        <div class="book-container">        
             <div class="books">
                 <div class="row">
                     @if(count($books) > 0)

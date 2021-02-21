@@ -92,6 +92,19 @@ class BooksTableSeeder extends Seeder
                 'approved' => '1',
                 'created_at' => '2021-02-09 09:37:59',
                 'updated_at' => '2021-02-09 09:37:59'
+            ], 
+            [
+                'id' => '7',
+                'user_id' => '1',
+                'title' => 'The Shadows',
+                'slug' => 'the-shadows',
+                'description' => 'This is a description about the book.',
+                'price' => '38',
+                'cover' => 'uploads/covers/1613913122.jpg',
+                'discount' => '0',
+                'approved' => '1',
+                'created_at' => '2021-02-09 09:37:59',
+                'updated_at' => '2021-02-09 09:37:59'
             ]      
         ]);
     }

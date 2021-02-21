@@ -4,8 +4,10 @@
     <div class="container-fluid">
         <h4>&quot;{{Auth()->user()->email}}&quot; book listing:</h4>
         <br>
-        <a href="{{ route('user_change_email') }}">Change Email</a>
-        {{-- <a href="user/change-email/{{Auth()->user()->id}}">Change Email</a> --}}
+        <ul>
+            <li style="padding-left: 28px;"><a href="{{ route('user_change_email') }}">Change Email</a></li>
+            <li style="padding-left: 28px;"><a href="{{ route('user_change_password') }}">Change Password</a></li>
+        </ul>
         <table class="table">
             <thead>
               <tr>
