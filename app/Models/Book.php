@@ -27,12 +27,6 @@ class Book extends Model
     protected $perPage = 25;
 
 
-    public function getBookBySlug($slug)
-    {   
-        $data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
-        return $data;
-    }
-
     public function authors()
     {
         return $this->belongsToMany(Author::class);

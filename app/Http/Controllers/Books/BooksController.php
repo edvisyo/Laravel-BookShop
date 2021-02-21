@@ -10,7 +10,6 @@ use App\Models\Genre;
 use App\Models\Author;
 use App\Models\AuthorBook;
 use App\Models\BookGenre;
-use App\Repositories\BookRepository;
 use Illuminate\Support\Str;
 use Cookie;
 use Auth;
@@ -19,11 +18,9 @@ use Intervention\Image\Facades\Image;
 class BooksController extends Controller
 {
 
-    private $bookRepository;
-    
-    public function __construct(BookRepository $bookRepository)
+    public function __construct()
     {
-        $this->bookRepository = $bookRepository;
+        //
     }
     
     /**
@@ -79,10 +76,11 @@ class BooksController extends Controller
         } else {
             $filename = 'default.jpg';
         }
+
+        $slug = Str::slug($request['title']). ' ' . Str::random();
         
         $book = auth()->user()->book()->create([
             'title' => $request['title'],
-            $slug = Str::slug($request['title']). ' ' . Str::random(),
             'slug' => $slug,
             'description' => $request['description'],
             'price' => $request['price'],
@@ -110,9 +108,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getSingleBook(Request $request)
+    public function getSingleBook(Request $request, $slug)
     {
-        $singleBook = $this->bookRepository->getBookBySlug($request);
+        $singleBook = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
         return view('pages.book.book-review')->with('singleBook', $singleBook);
     }
 

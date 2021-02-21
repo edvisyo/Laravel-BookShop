@@ -23,8 +23,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $user_id = Auth()->user()->id;
-        $user_books = Book::with('authors', 'genres')->where('user_id', '=', $user_id)->latest()->paginate(15);
+        $user_books = Book::with('authors', 'genres')->where('user_id', Auth()->id)->latest()->paginate(15);
         return view('pages.user.index')->with('user_books', $user_books);
     }
 
@@ -81,7 +80,7 @@ class UserController extends Controller
 
     public function updateBookView($slug)
     {
-        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $book = Book::where('slug', $slug)->firstOrFail();
         $authors = $book->authors()->get()->implode('fullname', ', ');
         $genres = $book->genres()->get()->implode('name', ', ');
 
@@ -93,7 +92,7 @@ class UserController extends Controller
 
     public function updateBook(Request $request, $slug)
     {
-        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $book = Book::where('slug', $slug)->firstOrFail();
 
         if($request->file('book_cover') != null)
         {

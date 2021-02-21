@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');
         Route::get('/change-email', [AdminController::class, 'changeEmailView'])->name('admin_change_email');
-        Route::put('/change-email{id}', [AdminController::class, 'updateEmail']);
+        Route::put('/change-email/{id}', [AdminController::class, 'updateEmail']);
         Route::get('/change-password', [AdminController::class, 'changePasswordView'])->name('admin_change_password');
         Route::put('/change-password/{id}', [AdminController::class, 'changePassword']);
         Route::get('/create-new-user', [AdminController::class, 'createNewUserView'])->name('create_new_user');
@@ -52,8 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
         Route::put('/change-password/{id}', [UserController::class, 'changePassword']);
         Route::get('/book/{slug}/update', [UserController::class, 'updateBookView'])->name('user_update_book');
         Route::put('/book/{slug}/update', [UserController::class, 'updateBook']);
-        //Route::get('/book/report/{id}', [MailController::class, 'emailTemplate'])->name('book_report');
-        //Route::post('/book-report/{id}', [MailController::class, 'sendReportMessage']);
     });
 });
 

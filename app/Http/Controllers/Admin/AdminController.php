@@ -115,7 +115,7 @@ class AdminController extends Controller
 
     public function updateBookView($slug)
     {
-        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $book = Book::where('slug', $slug)->firstOrFail();
         $authors = $book->authors()->get()->implode('fullname', ', ');
         $genres = $book->genres()->get()->implode('name', ', ');
 
@@ -127,7 +127,7 @@ class AdminController extends Controller
 
     public function updateBook(Request $request, $slug)
     {
-        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $book = Book::where('slug', $slug)->firstOrFail();
 
         if($request->file('book_cover') != null)
         {
