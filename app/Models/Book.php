@@ -29,31 +29,9 @@ class Book extends Model
 
     public function getBookBySlug($slug)
     {   
-        //$data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
         $data = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
-        
-        // $data = Book::with('authors', 'genres', 'reviews')
-        // ->join('reviews', 'reviews.user_id', '=', 'books.user_id')
-        // ->join('users', 'users.id', '=', 'reviews.user_id')
-        // ->select('books.id', 
-        //                  'books.user_id', 
-        //                  'books.title',
-        //                  'books.slug',
-        //                  'books.description',
-        //                  'books.price',
-        //                  'books.cover',
-        //                  'users.email AS user')
-        // ->where('slug', $slug)->first();
-
         return $data;
     }
-
-    // public function getUserBooks($user_id)
-    // {
-    //     $user_books = Book::with('authors', 'genres')->where('user_id', $user_id)->get();
-
-    //     return $user_books;
-    // }
 
     public function authors()
     {

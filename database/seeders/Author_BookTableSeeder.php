@@ -39,7 +39,17 @@ class Author_BookTableSeeder extends Seeder
                 'id' => '5',
                 'author_id' => '3',
                 'book_id' => '5'
-            ]     
+            ], 
+            [
+                'id' => '6',
+                'author_id' => '1',
+                'book_id' => '6'
+            ], 
+            [
+                'id' => '7',
+                'author_id' => '3',
+                'book_id' => '6'
+            ]       
         ]);
     }
 }

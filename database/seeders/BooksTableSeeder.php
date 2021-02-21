@@ -22,7 +22,7 @@ class BooksTableSeeder extends Seeder
                 'slug' => 'the-king-of-drugs',
                 'description' => 'This is a description about the book.',
                 'price' => '23',
-                'cover' => 'public/seed-images/the_king_of_drugs.jpg',
+                'cover' => 'uploads/covers/1613816132.jpg',
                 'discount' => '10',
                 'approved' => '1',
                 'created_at' => '2021-02-09 09:37:59',
@@ -35,7 +35,7 @@ class BooksTableSeeder extends Seeder
                 'slug' => 'tess-of-the-road',
                 'description' => 'This is a description about the book.',
                 'price' => '15',
-                'cover' => 'public/seed-images/tess_of_the_road.jpg',
+                'cover' => 'uploads/covers/1613825670.jpg',
                 'discount' => '0',
                 'approved' => '0',
                 'created_at' => '2021-02-09 09:37:59',
@@ -48,7 +48,7 @@ class BooksTableSeeder extends Seeder
                 'slug' => 'realm-of-ruins',
                 'description' => 'This is a description about the book.',
                 'price' => '25',
-                'cover' => 'public/seed-images/realm_of_ruins.jpg',
+                'cover' => 'uploads/covers/1613836172.jpg',
                 'discount' => '25',
                 'approved' => '1',
                 'created_at' => '2021-02-09 09:37:59',
@@ -61,7 +61,7 @@ class BooksTableSeeder extends Seeder
                 'slug' => 'the-twelfth-coin-finders',
                 'description' => 'This is a description about the book.',
                 'price' => '36',
-                'cover' => 'public/seed-images/the_twelfth_coin_finders.jpg',
+                'cover' => 'uploads/covers/1613836268.jpg',
                 'discount' => '0',
                 'approved' => '1',
                 'created_at' => '2021-02-17 09:37:59',
@@ -74,12 +74,25 @@ class BooksTableSeeder extends Seeder
                 'slug' => 'the-past-is-rising',
                 'description' => 'This is a description about the book.',
                 'price' => '42',
-                'cover' => 'public/seed-images/the_past_is_rising.jpg',
+                'cover' => 'uploads/covers/1613836288.jpg',
                 'discount' => '0',
                 'approved' => '0',
                 'created_at' => '2021-02-09 09:37:59',
                 'updated_at' => '2021-02-09 09:37:59'
-            ]     
+            ], 
+            [
+                'id' => '6',
+                'user_id' => '1',
+                'title' => 'The Past Is Rising',
+                'slug' => 'the-past-is-rising-420',
+                'description' => 'This is a description about the book.',
+                'price' => '38',
+                'cover' => 'uploads/covers/1613836288.jpg',
+                'discount' => '0',
+                'approved' => '1',
+                'created_at' => '2021-02-09 09:37:59',
+                'updated_at' => '2021-02-09 09:37:59'
+            ]      
         ]);
     }
 }

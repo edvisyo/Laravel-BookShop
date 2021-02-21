@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <h4>&quot;{{Auth()->user()->email}}&quot; book listing:</h4>
         <br>
         <a href="{{ route('user_change_email') }}">Change Email</a>

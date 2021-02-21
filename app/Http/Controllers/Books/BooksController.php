@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Books;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
 use App\Models\Genre;
 use App\Models\Author;
@@ -24,18 +25,6 @@ class BooksController extends Controller
     {
         $this->bookRepository = $bookRepository;
     }
-
-    // public function getBooks()
-    // {
-    //     $books = $this->bookRepository->getAllBooks();
-    //     return view('index')->with('books', $books);
-    // }
-
-    // public function getSingleBook(Request $request)
-    // {
-    //     $singleBook = $this->bookRepository->getBookBySlug($request);
-    //     return view('pages.book.book-review')->with('singleBook', $singleBook);
-    // }
     
     /**
      * Display a listing of the resource.
@@ -44,28 +33,10 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
-        // if($request->has('search'))
-        // {
-        //     $search = $request->get('search');
-        //     Cookie::queue('search' ,$search, (60 * 15));
-
-        //     $books = Book::with(['authors' => function($query) use($search) {
-        //     return $query->where('fullname', 'LIKE','%'.$search.'%');
-        //     }])
-        //     ->where('title','LIKE','%'.$search.'%')
-        //     ->with('authors')
-        //     ->approved()
-        //     ->paginate();
-        // } else {
-        //     $books = Book::with('authors')->approved()->paginate();
-        // }
-
-        // return view('index')->with('books', $books);
-
         if($request->has('search'))
         {
             $search = $request->get('search');
-            Cookie::queue('search' ,$search, (60 * 15));
+            $cookie = Cookie::queue('search' ,$search, (60 * 15));
 
             $books = Book::where('title', 'LIKE', '%' .$search. '%')
             ->orWhereHas('authors', function($query) use ($search) {
@@ -94,18 +65,8 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
-
-        $this->validate($request, [
-            'authors' => 'required',
-            'genres' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'book_cover' => 'required'
-        ]);
-
         if($request->hasFile('book_cover'))
         {
             $file = $request->file('book_cover');
@@ -149,29 +110,11 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-    //     //
-    // }
     public function getSingleBook(Request $request)
     {
         $singleBook = $this->bookRepository->getBookBySlug($request);
         return view('pages.book.book-review')->with('singleBook', $singleBook);
     }
-
-
-    // public function search(Request $request)
-    // {
-    //     $search = $request->get('search');
-    //     // $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%', 'OR', 'authors', 'LIKE', '%'.$search.'%')->paginate();
-    //     $books = Book::with('authors')->approved()->where('title', 'LIKE', '%'.$search.'%')->paginate();
-    //     return view('index')->with('books', $books);
-    // }
-
-    // public function getBookReviews(request $request)
-    // {
-        
-    // }
 
     /**
      * Show the form for editing the specified resource.

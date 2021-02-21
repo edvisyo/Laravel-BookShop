@@ -20,7 +20,7 @@
                     <hr>
                     <ul>
                         @foreach ($singleBook->authors as $author)
-                            <li><h5>{{$author->fullname}}</h5></li>
+                            <li><h5 class="genre-name">{{$author->fullname}}</h5></li>
                         @endforeach
                         <li class="book-average-rating mr-3">
                             <strong>Rating: </strong>

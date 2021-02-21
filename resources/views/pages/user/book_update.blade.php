@@ -42,17 +42,13 @@
                       </div>
                       
                       <div class="mb-3">
-                        {{Form::label('book_authors', 'Authors:')}} <span class="text-muted">(Optional)</span>
-                            @foreach ($book->authors as $author)
-                                {{Form::text('book_discount', ($author->fullname), ['class' => 'form-control'])}}
-                            @endforeach
+                        {{Form::label('book_authors', 'Authors:')}}
+                          <input type="text" name="book_authors" class="form-control" value="{{  $book->authors  }}" placeholder="John Doe, ....">
                       </div>
                       
                       <div class="mb-3">
-                        {{Form::label('book_genres', 'Genres:')}} <span class="text-muted">(Optional)</span>
-                            @foreach ($book->genres as $genre)
-                                {{Form::text('book_genres', ($genre->name), ['class' => 'form-control'])}}
-                            @endforeach
+                        {{Form::label('book_genres', 'Genres:')}}
+                         <input type="text" name="book_genres" class="form-control" value="{{  $book->genres  }}" placeholder="romance, action..">
                       </div>
         
                       <div class="row">
@@ -64,10 +60,9 @@
                           </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                          {{Form::label('book_discount', 'Discount:')}} (&percnt;)
-                          {{Form::text('book_discount', ($book->discount), ['class' => 'form-control', 'placeholder' => 'Your report message'])}}
-                        <div class="invalid-feedback">
-                            Zip code required.
+                          <div class="form-group">
+                            {{Form::label('book_cover', 'Change book cover:')}}
+                            {{Form::file('book_cover', null, ['class' => 'form-control'])}}
                           </div>
                         </div>
                       </div>
@@ -78,15 +73,12 @@
                         </div>
                         
                         <div class="uploaded-image-preview">
-                          <div class="">
+                          <div class="mb-3">
                             <span>New Book Image:</span>
                           </div>
                           <img class="uploaded-image-preview-resize mr-3" id="uploadedImage" src="#" alt="your image" />
                         </div>
-                        <div class="form-group">
-                          {{Form::label('book_cover', 'Change book cover:')}}
-                          {{Form::file('book_cover', null, ['class' => 'form-control'])}}
-                        </div>
+                        
                       </div>
                       <div class="row justify-content-end mt-5">
                         {{Form::hidden('_method', 'PUT')}}

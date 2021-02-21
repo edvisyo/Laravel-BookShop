@@ -13,6 +13,8 @@ use Intervention\Image\Facades\Image;
 use App\Models\Book;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Genre;
+use App\Models\Author;
 
 class AdminController extends Controller
 {
@@ -113,7 +115,13 @@ class AdminController extends Controller
 
     public function updateBookView($slug)
     {
-        $book = Book::with('authors', 'users', 'genres')->where('slug', '=', $slug)->firstOrFail();
+        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $authors = $book->authors()->get()->implode('fullname', ', ');
+        $genres = $book->genres()->get()->implode('name', ', ');
+
+        $book->authors = $authors;
+        $book->genres = $genres;
+
         return view('pages.admin.book_update')->with('book', $book);
     }
 
@@ -144,6 +152,25 @@ class AdminController extends Controller
 
         $book->title = $request->input('book_title');
         $book->description = $request->input('book_description');
+
+        $authors = explode(',',$request->input('book_authors'));
+        $genres = explode(',',$request->input('book_genres'));      
+
+        $book->authors()->detach();
+        $book->genres()->detach();
+    
+        foreach($authors as $author)
+        {   
+            $assignedAuthors = Author::where('fullname', $author)->firstOrCreate([ 'fullname' => $author]);
+            $assignedAuthors->books()->attach($book);
+        }
+        
+        foreach($genres as $genre)
+        {
+            $assignedGenres = Genre::where('name', $genre)->firstOrCreate([ 'name' => $genre]);
+            $assignedGenres->books()->attach($book);
+        }
+        
         $book->price = $request->input('book_price');
         $book->discount = $request->input('book_discount');
 
