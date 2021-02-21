@@ -1,0 +1,134 @@
+1. 
+SELECT aktorius.kas_vaidina, filmas_aktorius.ka_vaidina, filmas.filmo_pavadinimas 
+FROM `aktorius` INNER JOIN `filmas_aktorius` ON aktorius.aktoriaus_id=filmas_aktorius.f_aktoriaus_id 
+                            INNER JOIN `filmas` ON filmas.filmo_id=filmas_aktorius.f_aktoriaus_id 
+GROUP BY `filmo_pavadinimas`="Vertigo"
+
+2. 
+SELECT rezisierius_vardas_pavarde
+FROM  rezisierius
+WHERE rezisieriaus_id in (
+SELECT f_rezisieriaus_id 
+FROM filmas_rezisierius
+WHERE ff_filmo_id in(
+SELECT f_filmo_id 
+FROM filmas_aktorius WHERE ka_vaidina = ANY (
+SELECT ka_vaidina 
+FROM filmas_aktorius
+WHERE f_filmo_id IN (
+SELECT filmo_id 
+FROM filmas
+WHERE filmo_pavadinimas="Eyes Wide Shut"))))
+
+
+3. 
+SELECT `filmo_pavadinimas`, `filmo_sukurimo_valstybe`
+FROM `filmas` 
+WHERE `filmo_sukurimo_valstybe`!="UK"
+
+4.
+SELECT filmo_pavadinimas, pastatymo_metai, filmo_premjera, rezisierius_vardas_pavarde, 
+       kas_vaidina
+	   FROM filmas, filmas_rezisierius, rezisierius, 
+                filmas_ivertinimas, filmas_recenzija, aktorius, filmas_aktorius
+	   WHERE filmas.filmo_id=filmas_rezisierius.ff_filmo_id
+AND  filmas_rezisierius.f_rezisieriaus_id=rezisierius.rezisieriaus_id 
+ AND filmas.filmo_id=filmas_ivertinimas.i_filmo_id 
+  AND  filmas_ivertinimas.i_kritikai_id=filmas_recenzija.kritikai_id 
+   AND  filmas.filmo_id=filmas_aktorius.f_filmo_id 
+    AND filmas_aktorius.f_aktoriaus_id=aktorius.aktoriaus_id 
+	 AND filmas_recenzija.filmu_kritikai="No name" LIMIT 2
+
+5. 
+SELECT `f_rezisieriaus_id`, `ff_filmo_id` FROM `filmas_rezisierius` WHERE `f_rezisieriaus_id`=11
+ARBA
+SELECT filmo_pavadinimas, rezisierius_vardas_pavarde 
+FROM filmas, rezisierius, filmas_rezisierius 
+WHERE filmas.filmo_id=filmas_rezisierius.ff_filmo_id AND rezisierius.rezisieriaus_id=filmas_rezisierius.f_rezisieriaus_id AND rezisierius.rezisierius_vardas_pavarde="Woody Allen"
+
+6. 
+SELECT filmas.filmo_pavadinimas, zanras.filmo_zanrai, MAX(filmas_ivertinimas.ivertinimai) AS "ivertinimas"
+FROM filmas, zanras, filmas_zanras, filmas_ivertinimas, filmas_recenzija
+WHERE filmas.filmo_id=filmas_ivertinimas.i_filmo_id AND filmas.filmo_id=zanras.zanras_id AND zanras.filmo_zanrai="Mystery"
+GROUP BY filmo_zanrai
+
+7.
+SELECT filmu_kritikai, filmo_pavadinimas 
+FROM filmas_recenzija, filmas, filmas_ivertinimas, filmas_ivertinimas es2
+WHERE filmas_ivertinimas.i_filmo_id=filmas.filmo_id 
+  AND filmas_recenzija.kritikai_id=filmas_ivertinimas.i_kritikai_id 
+       AND filmas_ivertinimas.i_kritikai_id = es2.i_kritikai_id 
+GROUP BY filmu_kritikai, filmo_pavadinimas HAVING count(*) > 2
+
+10. 
+SELECT filmo_pavadinimas, rezisierius_vardas_pavarde, kas_vaidina
+FROM filmas, filmas_aktorius, rezisierius, filmas_rezisierius, aktorius
+WHERE filmas.filmo_id=filmas_aktorius.f_filmo_id 
+   AND filmas_aktorius.f_aktoriaus_id=aktorius.aktoriaus_id
+     AND filmas.filmo_id=filmas_rezisierius.ff_filmo_id
+       AND filmas_rezisierius.f_rezisieriaus_id=rezisierius.rezisieriaus_id
+         AND rezisieriaus_id=aktoriaus_id
+
+11. 
+SELECT DISTINCT filmas_recenzija.filmu_kritikai
+FROM filmas_recenzija, filmas_ivertinimas, filmas
+WHERE filmas_recenzija.kritikai_id = filmas_ivertinimas.i_kritikai_id
+AND filmas.filmo_id= filmas_ivertinimas.i_filmo_id
+AND filmas.filmo_pavadinimas = 'American Beauty'
+
+
+12. SELECT pastatymo_metai, filmo_zanrai 
+FROM filmas, zanras, filmas_zanras
+WHERE filmas.filmo_id=filmas_zanras.z_filmo_id AND zanras.zanras_id=filmas_zanras.z_zanras_id 
+                                           AND zanras.filmo_zanrai="Mystery"
+
+15.
+SELECT filmo_pavadinimas 
+FROM filmas, aktorius, filmas_aktorius 
+WHERE filmo_id=f_filmo_id AND f_aktoriaus_id=aktoriaus_id 
+GROUP BY f_aktoriaus_id 
+HAVING COUNT(f_aktoriaus_id)>1
+
+16.
+SELECT filmo_pavadinimas 
+FROM filmas, filmas_rezisierius, rezisierius, filmas_aktorius, aktorius 
+WHERE rezisierius.rezisieriaus_id=filmas_rezisierius.f_rezisieriaus_id 
+    AND filmas_rezisierius.ff_filmo_id=filmas.filmo_id
+         AND filmas.filmo_id=filmas_aktorius.f_filmo_id
+             AND aktorius.aktoriaus_id=filmas_aktorius.f_aktoriaus_id
+            	AND filmas_aktorius.ka_vaidina="Sean Maguire"
+
+17.
+SELECT kas_vaidina, filmo_pavadinimas, pastatymo_metai
+FROM aktorius, filmas_aktorius, filmas
+WHERE aktorius.aktoriaus_id=filmas_aktorius.f_aktoriaus_id
+ AND filmas_aktorius.f_filmo_id=filmas.filmo_id
+    AND filmas.pastatymo_metai NOT BETWEEN 1990 AND 2000
+
+18.
+SELECT rezisierius_vardas_pavarde, filmo_zanrai FROM rezisierius
+  INNER JOIN filmas_rezisierius ON rezisierius.rezisieriaus_id=filmas_rezisierius.f_rezisieriaus_id
+   INNER JOIN filmas ON filmas_rezisierius.ff_filmo_id=filmas.filmo_id
+     INNER JOIN filmas_zanras ON filmas.filmo_id=filmas_zanras.z_filmo_id
+       INNER JOIN zanras ON filmas_zanras.z_zanras_id=zanras.zanras_id
+
+19. 
+SELECT filmo_zanrai, AVG(filmo_trukme) AS "Vidutine filmo trukme min"
+FROM zanras, filmas_zanras, filmas
+ WHERE zanras.zanras_id=filmas_zanras.z_filmo_id
+    AND filmas_zanras.z_filmo_id=filmas.filmo_id
+GROUP BY filmas.filmo_trukme
+
+20.
+SELECT pastatymo_metai, ivertinimai
+FROM filmas, filmas_ivertinimas
+WHERE filmas.filmo_id=filmas_ivertinimas.i_filmo_id
+GROUP BY pastatymo_metai
+ORDER BY ivertinimai ASC
+
+21.
+SELECT filmo_pavadinimas, filmu_kritikai, ivertinimai
+FROM filmas, filmas_recenzija, filmas_ivertinimas
+WHERE filmas.filmo_id=filmas_ivertinimas.i_filmo_id 
+   AND filmas_ivertinimas.i_kritikai_id=filmas_recenzija.kritikai_id  
+ORDER BY `filmas_ivertinimas`.`ivertinimai`  DESC
