@@ -82,8 +82,8 @@
         </div>
 
         <hr>
-            
-            @forelse ($singleBook->reviews as $review)
+        
+        @forelse ($singleBook->reviews as $review)
                 <div class="card mb-2">
                     <div class="comment-container" style="padding: 10px;">
                         <div class="row">

@@ -7,7 +7,7 @@
                 <div class="row">
                     @if(count($books) > 0)
                         @foreach ($books as $book)
-                            <div class="col">
+                            <div class="col mb-5">
                                 @if ($book->is_new)
                                 <span class="new-product"><span class="badge badge-warning">New</span></span>
                                 @endif
@@ -40,9 +40,10 @@
                     @endif
                 </div>
             </div>
-            <div class="row justify-content-center mt-5">
-                {{ $books->links() }}
-            </div>
-        </div>  
+        </div> 
+
+        <div class="row justify-content-center mt-5">
+            {{ $books->links() }}
+        </div> 
     </div>
 @endsection

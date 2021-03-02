@@ -19,7 +19,9 @@ use App\Http\Controllers\Mail\MailController;
 */
 
 Route::resource('/', BooksController::class);
-Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
+//Route::get('/book/{slug}', [BooksController::class, 'getSingleBook']);
+
+Route::view('/book/{slug}', 'pages.book.book-vue');
 
 Route::get('/book/{slug}/report', [MailController::class, 'emailTemplate'])->name('book_report');
 Route::post('/book/{slug}/report', [MailController::class, 'sendReportMessage']);
@@ -27,7 +29,7 @@ Route::post('/book/{slug}/report', [MailController::class, 'sendReportMessage'])
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     //Route::resource('/book', BooksController::class);
-    Route::post('/book', [ReviewsController::class, 'storeBookReview']);
+    //Route::post('/book', [ReviewsController::class, 'storeBookReview']);
 
         Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
         Route::get('/', [AdminController::class, 'index'])->name('admin_page');

@@ -13,14 +13,13 @@ class ReviewsController extends Controller
       
     public function storeBookReview(ReviewRequest $request) 
     {
-       $user_id = Auth()->user()->id;
-       
+  
        if($request->validated())
        {
             $bookReviewComment = new Review();
         
             $bookReviewComment->book_id = $request->input('book_id');
-            $bookReviewComment->user_id = $user_id;
+            $bookReviewComment->user_id = Auth()->id();
             $bookReviewComment->stars = $request->input('stars');
             $bookReviewComment->comment = $request->input('comment');
             $bookReviewComment->save();

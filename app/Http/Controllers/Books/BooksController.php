@@ -53,7 +53,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('pages.book.book-create');
+        return view('pages.book.create');
     }
 
     /**
@@ -111,7 +111,7 @@ class BooksController extends Controller
     public function getSingleBook(Request $request, $slug)
     {
         $singleBook = Book::with('authors', 'genres', 'reviews', 'users')->where('slug', $slug)->firstOrFail();
-        return view('pages.book.book-review')->with('singleBook', $singleBook);
+        return view('pages.book.book')->with('singleBook', $singleBook);
     }
 
     /**

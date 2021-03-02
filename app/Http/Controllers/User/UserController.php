@@ -23,7 +23,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $user_books = Book::with('authors', 'genres')->where('user_id', Auth()->id)->latest()->paginate(15);
+        $user_books = Book::with('authors', 'genres')->where('user_id', Auth()->id())->latest()->paginate(15);
         return view('pages.user.index')->with('user_books', $user_books);
     }
 
