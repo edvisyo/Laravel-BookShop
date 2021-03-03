@@ -21,7 +21,7 @@ class BooksController extends Controller
 
     public function show(Book $book)
     {
-        return (new BookResource($book->load('authors', 'genres')))->response();
+        return (new BookResource($book->load('authors', 'genres')))->approved()->response();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

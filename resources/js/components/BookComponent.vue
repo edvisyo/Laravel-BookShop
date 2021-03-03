@@ -9,9 +9,9 @@
                     <img class="book-review-image" :src="book.cover" alt="book cover image">
                 </div>
                 <div class="col">
-                    <!-- @if(Auth()->user() !== null) -->
+                    <div v-if="user_id != null">
                         <a :href="'/book/'+book.slug+'/report'" class="book-report-link" style="color: black"><i class="far fa-paper-plane mr-3" style="text-decoration: underline; font-size: 17px"> Report book</i></a>
-                    <!-- @endif -->
+                    </div>
                     <div class="single-book-title">
                         <h2>{{book.title}}</h2>
                     </div>
@@ -20,12 +20,9 @@
                         <li><h5 class="genre-name">{{ book.authors }}</h5></li>
                         <li class="book-average-rating mr-3">
                             <strong>Rating: </strong>
-                            <!-- {{ book.rating }} -->
-                            <!-- <div v-for="(review) in book.reviews" :key="review.id"> -->
-                                <div v-for="(rating, index) in book.rating" :key="index" style="display: inline">
+                                <div v-for="(rating, index) in Math.floor(book.rating)" :key="index" style="display: inline">
                                     <i v-if="getStars(index)" class="fas fa-star rating-star-color"></i>
                                </div>
-                            <!-- </div> -->
                         </li>
                     </ul>
                     <ul>
@@ -42,13 +39,17 @@
                 <h3>Reviews</h3>
             </div>
             <div class="col">
-                <!-- @if (Auth()->user()) -->
+                <div v-if="user_id != null">
                     <div class="row justify-content-end mr-1">
                         <button class="btn btn-dark btn-sm" @click='showCommentForm()'>Leave a comment about this book</button>
                     </div>
-                <!-- @endif -->
+                </div>
             </div>
         </div>
+
+        <div class="alert alert-success" style="text-align: center" v-if='successMessage'>
+            Thanks for your review! 
+       </div>
 
         <div class="comment-form" id="commentForm" v-show='!hiddenCommentForm'>
             <button type="button" class="close mb-2 mt-2" aria-label="Close" @click='hideCommentForm()'>
@@ -96,7 +97,7 @@
             <div class="row">
                 <div class="col">
                     @<b>{{review.user.username}}</b>
-                    <div v-for="(stars, index) in review.stars" :key="stars.id" style="display: inline">
+                    <div v-for="(stars, index) in review.stars" :key="index" style="display: inline">
                         <i v-if="getStars(index)" class="fas fa-star rating-star-color"></i>
                     </div>
                 </div>
@@ -123,13 +124,13 @@
 <script>
     export default {
         props: [
-            'book_id', 
             'user_id'
             ],
         data() {
             return {
                 book: [],
                 hiddenCommentForm: true,
+                successMessage: false,
                 review: {
                     book_id: '',
                     user_id: '',
@@ -174,7 +175,9 @@
                    } 
                 })
                 .then(data => {
+                    this.review.stars = '',
                     this.review.comment = '';
+                    this.successMessage = true;
                     this.hideCommentForm();
                     this.fetchBook();
                 })
